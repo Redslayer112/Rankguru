@@ -1,2 +1,2 @@
 # Rankguru
-Rankguru GUI for retrieving 
+Rankguru GUI for retrieving Test List Data
