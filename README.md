@@ -35,3 +35,5 @@ As of V0.1, to get ans you need qpid or questionpaperid
 - copy the value of questionpaperid (the numbers and alphabets bext to questionpaperid)
 - Now you have copied the questionpaperid, Open Rankguru app which you have donloaded from here, and paste it
 - The app will return the ans of the qpid
+
+## If you are comfortable using CLI you can checkout: https://github.com/SwaminathShiju/rankguru

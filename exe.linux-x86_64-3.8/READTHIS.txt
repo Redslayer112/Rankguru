@@ -1,0 +1,3 @@
+Open the app using terminal only !
+Open the app using `./Rankguru`
+
