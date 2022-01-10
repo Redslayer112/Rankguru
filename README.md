@@ -5,9 +5,6 @@ Rankguru GUI for retrieving Test List Data
 ### You can go to the release page install the latest version of the app
 
 ## Usage :
-### After you install, :
-### First open a json file called "auth.json" in the same folder where Rankguru.exe is . . .      -*IMPORTANT*
-
 ### To get Auth :
 - Login to rankguru.com
 - Open the category of your exams (Ex - All India level exams)
