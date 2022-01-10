@@ -2,11 +2,11 @@
 Rankguru GUI for retrieving Test List Data
 
 ## Installing :
-### You can go to the release page install the latest version of your os
+### You can go to the release page install the latest version of the app
 
 ## Usage :
 ### After you install, :
-#### First make a new json file called "auth.json" in the same folder where Rankguru.exe is . . .      -*IMPORTANT*
+### First open a json file called "auth.json" in the same folder where Rankguru.exe is . . .      -*IMPORTANT*
 
 ### To get Auth :
 - Login to rankguru.com
@@ -37,4 +37,4 @@ To get ans you need qpid (questionpaperid)
 - Now you have copied the questionpaperid, Open Rankguru app which you have donloaded from here, and paste it
 - The app will return the ans of the qpid or the question paper
 
-## If you are comfortable using CLI you can checkout: https://github.com/SwaminathShiju/rankguru
+## If you are comfortable using CLI instead of app you can checkout: https://github.com/SwaminathShiju/rankguru
