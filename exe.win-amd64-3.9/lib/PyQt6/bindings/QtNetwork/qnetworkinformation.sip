@@ -41,6 +41,9 @@ public:
     enum class Feature
     {
         Reachability,
+%If (Qt_6_2_0 -)
+        CaptivePortal,
+%End
     };
 
     typedef QFlags<QNetworkInformation::Feature> Features;
@@ -53,7 +56,17 @@ public:
     static QNetworkInformation *instance();
 
 signals:
-    void reachabilityChanged(QNetworkInformation::Reachability newReachability);
+    void reachabilityChanged(QNetworkInformation::Reachability newReachability /ScopesStripped=1/);
+
+public:
+%If (Qt_6_2_0 -)
+    bool isBehindCaptivePortal() const;
+%End
+
+signals:
+%If (Qt_6_2_0 -)
+    void isBehindCaptivePortalChanged(bool state);
+%End
 
 private:
     virtual ~QNetworkInformation();

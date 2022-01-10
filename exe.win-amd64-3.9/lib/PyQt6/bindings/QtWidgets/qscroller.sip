@@ -84,5 +84,4 @@ signals:
 private:
     QScroller(QObject *target);
     virtual ~QScroller();
-    QScroller(const QScroller &);
 };

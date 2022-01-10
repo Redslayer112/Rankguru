@@ -99,8 +99,16 @@ class QOpenGLDebugLogger : QObject
         {sipName_QOpenGLDebugLogger, &sipType_QOpenGLDebugLogger, -1, 1},
         {sipName_QOpenGLShader, &sipType_QOpenGLShader, -1, 2},
         {sipName_QOpenGLShaderProgram, &sipType_QOpenGLShaderProgram, -1, 3},
+    #if !defined(SIP_FEATURE_PyQt_OpenGL_ES2)
         {sipName_QOpenGLTimeMonitor, &sipType_QOpenGLTimeMonitor, -1, 4},
+    #else
+        {0, 0, -1, 4},
+    #endif
+    #if !defined(SIP_FEATURE_PyQt_OpenGL_ES2)
         {sipName_QOpenGLTimerQuery, &sipType_QOpenGLTimerQuery, -1, 5},
+    #else
+        {0, 0, -1, 5},
+    #endif
         {sipName_QOpenGLVertexArrayObject, &sipType_QOpenGLVertexArrayObject, -1, 6},
         {sipName_QOpenGLWindow, &sipType_QOpenGLWindow, -1, -1},
     };

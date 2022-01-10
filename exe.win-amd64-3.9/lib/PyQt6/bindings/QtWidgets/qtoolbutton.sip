@@ -70,4 +70,7 @@ protected:
     virtual void mouseReleaseEvent(QMouseEvent *);
     virtual void nextCheckState();
     virtual bool hitButton(const QPoint &pos) const;
+%If (Qt_6_2_0 -)
+    virtual void checkStateSet();
+%End
 };

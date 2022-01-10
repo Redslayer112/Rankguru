@@ -18,8 +18,24 @@ Module {
             "QtQml.WorkerScript/WorkerScript 6.0"
         ]
         exportMetaObjectRevisions: [512, 527, 1536]
-        Property { name: "source"; type: "QUrl"; read: "source"; write: "setSource" }
-        Property { name: "ready"; revision: 527; type: "bool"; isReadonly: true; read: "ready" }
+        Property {
+            name: "source"
+            type: "QUrl"
+            read: "source"
+            write: "setSource"
+            notify: "sourceChanged"
+            index: 0
+        }
+        Property {
+            name: "ready"
+            revision: 527
+            type: "bool"
+            read: "ready"
+            notify: "readyChanged"
+            index: 1
+            isReadonly: true
+        }
+        Signal { name: "sourceChanged" }
         Signal { name: "readyChanged"; revision: 527 }
         Signal {
             name: "message"

@@ -51,5 +51,8 @@ public:
         ExamplesPath,
         TestsPath,
         SettingsPath,
+%If (Qt_6_2_0 -)
+        QmlImportsPath,
+%End
     };
 };

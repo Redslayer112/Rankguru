@@ -54,4 +54,7 @@ public:
     };
 
     void setContextProperties(const QList<QQmlContext::PropertyPair> &properties);
+%If (Qt_6_2_0 -)
+    QObject *objectForName(const QString &) const;
+%End
 };

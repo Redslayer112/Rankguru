@@ -66,6 +66,9 @@ public:
     bool isRegExp() const;
     bool isArray() const;
     bool isError() const;
+%If (Qt_6_2_0 -)
+    bool isUrl() const;
+%End
     QString toString() const;
     double toNumber() const;
     qint32 toInt() const;

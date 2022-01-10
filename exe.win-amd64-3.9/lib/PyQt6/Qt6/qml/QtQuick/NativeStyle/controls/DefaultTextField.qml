@@ -45,14 +45,12 @@ T.TextField {
 
     readonly property bool __nativeBackground: background instanceof NativeStyle.StyleItem
 
-    implicitWidth: Math.max(Math.max(contentWidth, placeholder.implicitWidth) + leftPadding + rightPadding,
-                            implicitBackgroundWidth + leftInset + rightInset,
-                            90 /* minimum */ )
+    implicitWidth: implicitBackgroundWidth + leftInset + rightInset
+                   || Math.max(contentWidth, placeholder.implicitWidth) + leftPadding + rightPadding
+
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
                              contentHeight + topPadding + bottomPadding,
                              placeholder.implicitHeight + topPadding + bottomPadding)
-
-    font.pixelSize: __nativeBackground ? background.styleFont(control).pixelSize : undefined
 
     leftPadding: __nativeBackground ? background.contentPadding.left: 7
     rightPadding: __nativeBackground ? background.contentPadding.right: 7
@@ -62,16 +60,15 @@ T.TextField {
     color: control.palette.text
     selectionColor: control.palette.highlight
     selectedTextColor: control.palette.highlightedText
-    placeholderTextColor: Color.transparent(control.color, 0.5)
+    placeholderTextColor: control.palette.placeholderText
     verticalAlignment: TextInput.AlignTop
 
     PlaceholderText {
         id: placeholder
-        height: control.height
-        topPadding: control.topPadding
-        bottomPadding: control.bottomPadding
-        leftPadding: control.leftPadding
-        rightPadding: control.rightPadding
+        x: control.leftPadding
+        y: control.topPadding
+        width: control.availableWidth
+        height: control.availableHeight
         text: control.placeholderText
         font: control.font
         color: control.placeholderTextColor

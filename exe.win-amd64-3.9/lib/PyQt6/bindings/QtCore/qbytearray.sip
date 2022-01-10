@@ -109,7 +109,7 @@ return 0;
 %End
 
 %PickleCode
-    sipRes = Py_BuildValue("(y#)", sipCpp->data(), sipCpp->size());
+    sipRes = Py_BuildValue("(y#)", sipCpp->data(), static_cast<Py_ssize_t>(sipCpp->size()));
 %End
 
 public:
@@ -414,6 +414,8 @@ QByteArray qCompress(const uchar *data /Array/, qsizetype nbytes /ArraySize/, in
 QByteArray qCompress(const QByteArray &data, int compressionLevel = -1);
 QByteArray qUncompress(const uchar *data /Array/, qsizetype nbytes /ArraySize/);
 QByteArray qUncompress(const QByteArray &data);
+%If (- Qt_6_2_0)
 quint16 qChecksum(QByteArrayView data, Qt::ChecksumType standard = Qt::ChecksumIso3309);
+%End
 bool operator==(const QByteArray::FromBase64Result &lhs, const QByteArray::FromBase64Result &rhs);
 bool operator!=(const QByteArray::FromBase64Result &lhs, const QByteArray::FromBase64Result &rhs);

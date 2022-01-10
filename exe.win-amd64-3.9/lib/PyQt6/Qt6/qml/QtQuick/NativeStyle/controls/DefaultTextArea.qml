@@ -58,16 +58,15 @@ T.TextArea {
     color: control.palette.text
     selectionColor: control.palette.highlight
     selectedTextColor: control.palette.highlightedText
-    placeholderTextColor: Color.transparent(control.color, 0.5)
+    placeholderTextColor: control.palette.placeholderText
     verticalAlignment: TextInput.AlignTop
 
     PlaceholderText {
         id: placeholder
-        height: control.height
-        topPadding: control.topPadding
-        bottomPadding: control.bottomPadding
-        leftPadding: control.leftPadding
-        rightPadding: control.rightPadding
+        x: control.leftPadding
+        y: control.topPadding
+        width: control.availableWidth
+        height: control.availableHeight
         text: control.placeholderText
         font: control.font
         color: control.placeholderTextColor

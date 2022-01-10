@@ -18,14 +18,15 @@ Module {
         isCreatable: false
         isSingleton: true
         exportMetaObjectRevisions: [515, 1536]
-        Property { name: "lightShade"; type: "QColor"; isReadonly: true; read: "lightShade" }
-        Property { name: "darkShade"; type: "QColor"; isReadonly: true; read: "darkShade" }
-        Property { name: "topShadow"; type: "QColor"; isReadonly: true; read: "topShadow" }
+        Property { name: "lightShade"; type: "QColor"; read: "lightShade"; index: 0; isReadonly: true }
+        Property { name: "darkShade"; type: "QColor"; read: "darkShade"; index: 1; isReadonly: true }
+        Property { name: "topShadow"; type: "QColor"; read: "topShadow"; index: 2; isReadonly: true }
         Property {
             name: "innerContrastLine"
             type: "QColor"
-            isReadonly: true
             read: "innerContrastLine"
+            index: 3
+            isReadonly: true
         }
         Method {
             name: "highlight"

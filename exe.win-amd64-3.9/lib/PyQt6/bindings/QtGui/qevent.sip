@@ -725,6 +725,8 @@ public:
     QMouseEvent(QEvent::Type type, const QPointF &localPos, const QPointF &globalPos, Qt::MouseButton button, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, const QPointingDevice *device = QPointingDevice::primaryPointingDevice());
     QMouseEvent(QEvent::Type type, const QPointF &localPos, const QPointF &scenePos, const QPointF &globalPos, Qt::MouseButton button, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, const QPointingDevice *device = QPointingDevice::primaryPointingDevice());
     virtual ~QMouseEvent();
+    QPoint pos() const;
+    Qt::MouseEventFlags flags() const;
     virtual QMouseEvent *clone() const /Factory/;
 };
 
@@ -787,11 +789,20 @@ class QNativeGestureEvent : QSinglePointEvent /NoDefaultCtors/
 %End
 
 public:
+%If (Qt_6_2_0 -)
+    QNativeGestureEvent(Qt::NativeGestureType type, const QPointingDevice *dev, int fingerCount, const QPointF &localPos, const QPointF &scenePos, const QPointF &globalPos, qreal value, const QPointF &delta, quint64 sequenceId = UINT64_MAX);
+%End
     QNativeGestureEvent(Qt::NativeGestureType type, const QPointingDevice *dev, const QPointF &localPos, const QPointF &scenePos, const QPointF &globalPos, qreal value, quint64 sequenceId, quint64 intArgument);
     virtual ~QNativeGestureEvent();
     Qt::NativeGestureType gestureType() const;
     qreal value() const;
     virtual QNativeGestureEvent *clone() const /Factory/;
+%If (Qt_6_2_0 -)
+    int fingerCount() const;
+%End
+%If (Qt_6_2_0 -)
+    QPointF delta() const;
+%End
 };
 
 class QTouchEvent : QPointerEvent /NoDefaultCtors/

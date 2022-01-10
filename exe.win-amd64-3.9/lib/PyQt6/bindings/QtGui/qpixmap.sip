@@ -102,6 +102,9 @@ public:
     void swap(QPixmap &other /Constrained/);
     qreal devicePixelRatio() const;
     void setDevicePixelRatio(qreal scaleFactor);
+%If (Qt_6_2_0 -)
+    QSizeF deviceIndependentSize() const;
+%End
 };
 
 QDataStream &operator<<(QDataStream &, const QPixmap &) /ReleaseGIL/;

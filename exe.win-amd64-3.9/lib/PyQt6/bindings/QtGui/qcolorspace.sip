@@ -94,6 +94,12 @@ public:
     static QColorSpace fromIccProfile(const QByteArray &iccProfile);
     QByteArray iccProfile() const;
     QColorTransform transformationToColorSpace(const QColorSpace &colorspace) const;
+%If (Qt_6_2_0 -)
+    QString description() const;
+%End
+%If (Qt_6_2_0 -)
+    void setDescription(const QString &description);
+%End
 };
 
 bool operator==(const QColorSpace &colorSpace1, const QColorSpace &colorSpace2);

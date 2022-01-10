@@ -56,11 +56,16 @@ public:
     };
 
     typedef QList<QTimeZone::OffsetData> OffsetDataList;
-    QTimeZone();
+%If (Qt_6_2_0 -)
+    QTimeZone(const QByteArray &zoneId, int offsetSeconds, const QString &name, const QString &abbreviation, QLocale::Territory territory = QLocale::AnyTerritory, const QString &comment = QString());
+%End
+%If (- Qt_6_2_0)
+    QTimeZone(const QByteArray &zoneId, int offsetSeconds, const QString &name, const QString &abbreviation, QLocale::Country country = QLocale::AnyCountry, const QString &comment = QString());
+%End
     explicit QTimeZone(const QByteArray &ianaId);
     explicit QTimeZone(int offsetSeconds);
-    QTimeZone(const QByteArray &zoneId, int offsetSeconds, const QString &name, const QString &abbreviation, QLocale::Country country = QLocale::AnyCountry, const QString &comment = QString());
     QTimeZone(const QTimeZone &other);
+    QTimeZone();
     ~QTimeZone();
     void swap(QTimeZone &other /Constrained/);
     bool operator==(const QTimeZone &other) const;
@@ -68,6 +73,9 @@ public:
     bool isValid() const;
     QByteArray id() const;
     QLocale::Country country() const;
+%If (Qt_6_2_0 -)
+    QLocale::Territory territory() const;
+%End
     QString comment() const;
     QString displayName(const QDateTime &atDateTime, QTimeZone::NameType nameType = QTimeZone::DefaultName, const QLocale &locale = QLocale()) const;
     QString displayName(QTimeZone::TimeType timeType, QTimeZone::NameType nameType = QTimeZone::DefaultName, const QLocale &locale = QLocale()) const;
@@ -84,14 +92,29 @@ public:
     QTimeZone::OffsetDataList transitions(const QDateTime &fromDateTime, const QDateTime &toDateTime) const;
     static QByteArray systemTimeZoneId();
     static bool isTimeZoneIdAvailable(const QByteArray &ianaId);
-    static QList<QByteArray> availableTimeZoneIds();
+%If (Qt_6_2_0 -)
+    static QList<QByteArray> availableTimeZoneIds(QLocale::Territory territory /Constrained/);
+%End
+%If (- Qt_6_2_0)
     static QList<QByteArray> availableTimeZoneIds(QLocale::Country country /Constrained/);
+%End
     static QList<QByteArray> availableTimeZoneIds(int offsetSeconds);
+    static QList<QByteArray> availableTimeZoneIds();
     static QByteArray ianaIdToWindowsId(const QByteArray &ianaId);
     static QByteArray windowsIdToDefaultIanaId(const QByteArray &windowsId);
+%If (Qt_6_2_0 -)
+    static QByteArray windowsIdToDefaultIanaId(const QByteArray &windowsId, QLocale::Territory territory);
+%End
+%If (- Qt_6_2_0)
     static QByteArray windowsIdToDefaultIanaId(const QByteArray &windowsId, QLocale::Country country);
+%End
     static QList<QByteArray> windowsIdToIanaIds(const QByteArray &windowsId);
+%If (Qt_6_2_0 -)
+    static QList<QByteArray> windowsIdToIanaIds(const QByteArray &windowsId, QLocale::Territory territory);
+%End
+%If (- Qt_6_2_0)
     static QList<QByteArray> windowsIdToIanaIds(const QByteArray &windowsId, QLocale::Country country);
+%End
     static QTimeZone systemTimeZone();
     static QTimeZone utc();
 };

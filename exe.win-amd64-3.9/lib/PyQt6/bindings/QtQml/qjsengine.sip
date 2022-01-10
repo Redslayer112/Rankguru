@@ -178,6 +178,14 @@ public:
 
 signals:
     void uiLanguageChanged();
+
+public:
+%If (Qt_6_2_0 -)
+    bool registerModule(const QString &moduleName, const QJSValue &value);
+%End
+%If (Qt_6_2_0 -)
+    QJSValue newSymbol(const QString &name);
+%End
 };
 
 QJSEngine *qjsEngine(const QObject *);

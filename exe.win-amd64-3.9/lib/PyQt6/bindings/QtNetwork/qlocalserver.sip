@@ -57,6 +57,9 @@ public:
         GroupAccessOption,
         OtherAccessOption,
         WorldAccessOption,
+%If (Qt_6_2_0 -)
+        AbstractNamespaceOption,
+%End
     };
 
     typedef QFlags<QLocalServer::SocketOption> SocketOptions;

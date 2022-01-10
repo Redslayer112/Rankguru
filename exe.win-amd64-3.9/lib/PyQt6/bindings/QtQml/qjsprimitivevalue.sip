@@ -73,6 +73,12 @@ public:
     QString toString() const;
     bool strictlyEquals(const QJSPrimitiveValue &other) const;
     bool equals(const QJSPrimitiveValue &other) const;
+%If (Qt_6_2_0 -)
+    QJSPrimitiveValue operator+();
+%End
+%If (Qt_6_2_0 -)
+    QJSPrimitiveValue operator-();
+%End
 };
 
 %End

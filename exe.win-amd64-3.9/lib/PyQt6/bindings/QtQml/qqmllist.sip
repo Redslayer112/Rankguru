@@ -46,7 +46,7 @@ public:
     bool append(QObject *) const;
     QObject *at(qsizetype) const;
     bool clear() const;
-    qsizetype count() const;
+    qsizetype count() const /__len__/;
     bool canReplace() const;
     bool canRemoveLast() const;
     bool replace(qsizetype, QObject *) const;

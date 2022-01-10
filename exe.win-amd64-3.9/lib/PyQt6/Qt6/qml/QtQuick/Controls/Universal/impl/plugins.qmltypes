@@ -11,6 +11,7 @@ Module {
         name: "QQuickUniversalBusyIndicator"
         accessSemantics: "reference"
         defaultProperty: "data"
+        parentProperty: "parent"
         prototype: "QQuickItem"
         exports: [
             "QtQuick.Controls.Universal.impl/BusyIndicatorImpl 2.0",
@@ -21,8 +22,8 @@ Module {
             "QtQuick.Controls.Universal.impl/BusyIndicatorImpl 6.0"
         ]
         exportMetaObjectRevisions: [512, 513, 516, 519, 523, 1536]
-        Property { name: "count"; type: "int"; read: "count"; write: "setCount" }
-        Property { name: "color"; type: "QColor"; read: "color"; write: "setColor" }
+        Property { name: "count"; type: "int"; read: "count"; write: "setCount"; index: 0; isFinal: true }
+        Property { name: "color"; type: "QColor"; read: "color"; write: "setColor"; index: 1; isFinal: true }
     }
     Component {
         file: "qquickuniversalfocusrectangle_p.h"
@@ -44,6 +45,7 @@ Module {
         name: "QQuickUniversalProgressBar"
         accessSemantics: "reference"
         defaultProperty: "data"
+        parentProperty: "parent"
         prototype: "QQuickItem"
         exports: [
             "QtQuick.Controls.Universal.impl/ProgressBarImpl 2.0",
@@ -54,13 +56,22 @@ Module {
             "QtQuick.Controls.Universal.impl/ProgressBarImpl 6.0"
         ]
         exportMetaObjectRevisions: [512, 513, 516, 519, 523, 1536]
-        Property { name: "color"; type: "QColor"; read: "color"; write: "setColor" }
-        Property { name: "progress"; type: "double"; read: "progress"; write: "setProgress" }
+        Property { name: "color"; type: "QColor"; read: "color"; write: "setColor"; index: 0; isFinal: true }
+        Property {
+            name: "progress"
+            type: "double"
+            read: "progress"
+            write: "setProgress"
+            index: 1
+            isFinal: true
+        }
         Property {
             name: "indeterminate"
             type: "bool"
             read: "isIndeterminate"
             write: "setIndeterminate"
+            index: 2
+            isFinal: true
         }
     }
 }

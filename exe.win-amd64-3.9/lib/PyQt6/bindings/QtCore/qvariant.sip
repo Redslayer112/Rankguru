@@ -90,7 +90,7 @@ public:
 };
 
 QDataStream &operator>>(QDataStream &s, QVariant &p /Constrained/) /ReleaseGIL/;
-QDataStream &operator<<(QDataStream &s, const QVariant &p) /ReleaseGIL/;
+QDataStream &operator<<(QDataStream &s, const QVariant &p /Constrained/) /ReleaseGIL/;
 bool operator==(const QVariant &a, const QVariant &b);
 bool operator!=(const QVariant &a, const QVariant &b);
 typedef QHash<QString, QVariant> QVariantHash /TypeHint="Dict[QString, QVariant]"/;

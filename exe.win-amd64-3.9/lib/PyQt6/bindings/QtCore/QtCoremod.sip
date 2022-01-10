@@ -20,9 +20,9 @@
 // WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 
 
-%Module(name=PyQt6.QtCore, call_super_init=True, default_VirtualErrorHandler=PyQt6, keyword_arguments="Optional", use_limited_api=True)
+%Module(name=PyQt6.QtCore, call_super_init=True, default_VirtualErrorHandler=PyQt6, keyword_arguments="Optional", use_limited_api=True, py_ssize_t_clean=True)
 
-%Timeline {Qt_6_0_0 Qt_6_1_0}
+%Timeline {Qt_6_0_0 Qt_6_1_0 Qt_6_2_0}
 
 %Platforms {Android iOS Linux macOS WebAssembly Windows}
 
@@ -73,8 +73,8 @@ int PYQT_VERSION;
 const char *PYQT_VERSION_STR;
 
 %ModuleCode
-static int PYQT_VERSION = 0x060101;
-static const char *PYQT_VERSION_STR = "6.1.1";
+static int PYQT_VERSION = 0x060202;
+static const char *PYQT_VERSION_STR = "6.2.2";
 %End
 
 %Include qglobal.sip
@@ -89,6 +89,7 @@ static const char *PYQT_VERSION_STR = "6.1.1";
 %Include qbitarray.sip
 %Include qbuffer.sip
 %Include qbytearray.sip
+%Include qbytearrayalgorithms.sip
 %Include qbytearraymatcher.sip
 %Include qcalendar.sip
 %Include qcborcommon.sip

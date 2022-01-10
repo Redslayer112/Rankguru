@@ -19,9 +19,20 @@ Module {
             "QtQuick.Controls.impl/CheckLabel 2.9",
             "QtQuick.Controls.impl/CheckLabel 2.10",
             "QtQuick.Controls.impl/CheckLabel 2.11",
-            "QtQuick.Controls.impl/CheckLabel 6.0"
+            "QtQuick.Controls.impl/CheckLabel 6.0",
+            "QtQuick.Controls.impl/CheckLabel 6.2"
         ]
-        exportMetaObjectRevisions: [515, 516, 518, 519, 521, 522, 523, 1536]
+        exportMetaObjectRevisions: [
+            515,
+            516,
+            518,
+            519,
+            521,
+            522,
+            523,
+            1536,
+            1538
+        ]
     }
     Component {
         file: "private/qquickclippedtext_p.h"
@@ -37,7 +48,8 @@ Module {
             "QtQuick.Controls.impl/ClippedText 2.9",
             "QtQuick.Controls.impl/ClippedText 2.10",
             "QtQuick.Controls.impl/ClippedText 2.11",
-            "QtQuick.Controls.impl/ClippedText 6.0"
+            "QtQuick.Controls.impl/ClippedText 6.0",
+            "QtQuick.Controls.impl/ClippedText 6.2"
         ]
         exportMetaObjectRevisions: [
             514,
@@ -48,12 +60,27 @@ Module {
             521,
             522,
             523,
-            1536
+            1536,
+            1538
         ]
-        Property { name: "clipX"; type: "double"; read: "clipX"; write: "setClipX" }
-        Property { name: "clipY"; type: "double"; read: "clipY"; write: "setClipY" }
-        Property { name: "clipWidth"; type: "double"; read: "clipWidth"; write: "setClipWidth" }
-        Property { name: "clipHeight"; type: "double"; read: "clipHeight"; write: "setClipHeight" }
+        Property { name: "clipX"; type: "double"; read: "clipX"; write: "setClipX"; index: 0; isFinal: true }
+        Property { name: "clipY"; type: "double"; read: "clipY"; write: "setClipY"; index: 1; isFinal: true }
+        Property {
+            name: "clipWidth"
+            type: "double"
+            read: "clipWidth"
+            write: "setClipWidth"
+            index: 2
+            isFinal: true
+        }
+        Property {
+            name: "clipHeight"
+            type: "double"
+            read: "clipHeight"
+            write: "setClipHeight"
+            index: 3
+            isFinal: true
+        }
     }
     Component {
         file: "private/qquickcolor_p.h"
@@ -94,11 +121,40 @@ Module {
             "QtQuick.Controls.impl/ColorImage 2.11",
             "QtQuick.Controls.impl/ColorImage 2.14",
             "QtQuick.Controls.impl/ColorImage 2.15",
-            "QtQuick.Controls.impl/ColorImage 6.0"
+            "QtQuick.Controls.impl/ColorImage 6.0",
+            "QtQuick.Controls.impl/ColorImage 6.2"
         ]
-        exportMetaObjectRevisions: [515, 516, 517, 519, 523, 526, 527, 1536]
-        Property { name: "color"; type: "QColor"; read: "color"; write: "setColor" }
-        Property { name: "defaultColor"; type: "QColor"; read: "defaultColor"; write: "setDefaultColor" }
+        exportMetaObjectRevisions: [
+            515,
+            516,
+            517,
+            519,
+            523,
+            526,
+            527,
+            1536,
+            1538
+        ]
+        Property {
+            name: "color"
+            type: "QColor"
+            read: "color"
+            write: "setColor"
+            notify: "colorChanged"
+            index: 0
+            isFinal: true
+        }
+        Property {
+            name: "defaultColor"
+            type: "QColor"
+            read: "defaultColor"
+            write: "setDefaultColor"
+            notify: "defaultColorChanged"
+            index: 1
+            isFinal: true
+        }
+        Signal { name: "colorChanged" }
+        Signal { name: "defaultColorChanged" }
     }
     Component {
         file: "private/qquickiconimage_p.h"
@@ -113,17 +169,47 @@ Module {
             "QtQuick.Controls.impl/IconImage 2.11",
             "QtQuick.Controls.impl/IconImage 2.14",
             "QtQuick.Controls.impl/IconImage 2.15",
-            "QtQuick.Controls.impl/IconImage 6.0"
+            "QtQuick.Controls.impl/IconImage 6.0",
+            "QtQuick.Controls.impl/IconImage 6.2"
         ]
-        exportMetaObjectRevisions: [515, 516, 517, 519, 523, 526, 527, 1536]
-        Property { name: "name"; type: "QString"; read: "name"; write: "setName" }
-        Property { name: "color"; type: "QColor"; read: "color"; write: "setColor" }
+        exportMetaObjectRevisions: [
+            515,
+            516,
+            517,
+            519,
+            523,
+            526,
+            527,
+            1536,
+            1538
+        ]
+        Property {
+            name: "name"
+            type: "QString"
+            read: "name"
+            write: "setName"
+            notify: "nameChanged"
+            index: 0
+            isFinal: true
+        }
+        Property {
+            name: "color"
+            type: "QColor"
+            read: "color"
+            write: "setColor"
+            notify: "colorChanged"
+            index: 1
+            isFinal: true
+        }
+        Signal { name: "nameChanged" }
+        Signal { name: "colorChanged" }
     }
     Component {
         file: "private/qquickiconlabel_p.h"
         name: "QQuickIconLabel"
         accessSemantics: "reference"
         defaultProperty: "data"
+        parentProperty: "parent"
         prototype: "QQuickItem"
         exports: [
             "QtQuick.Controls.impl/IconLabel 2.3",
@@ -142,32 +228,74 @@ Module {
                 "TextUnderIcon"
             ]
         }
-        Property { name: "icon"; type: "QQuickIcon"; read: "icon"; write: "setIcon" }
-        Property { name: "text"; type: "QString"; read: "text"; write: "setText" }
-        Property { name: "font"; type: "QFont"; read: "font"; write: "setFont" }
-        Property { name: "color"; type: "QColor"; read: "color"; write: "setColor" }
-        Property { name: "display"; type: "Display"; read: "display"; write: "setDisplay" }
-        Property { name: "spacing"; type: "double"; read: "spacing"; write: "setSpacing" }
-        Property { name: "mirrored"; type: "bool"; read: "isMirrored"; write: "setMirrored" }
-        Property { name: "alignment"; type: "Qt::Alignment"; read: "alignment"; write: "setAlignment" }
-        Property { name: "topPadding"; type: "double"; read: "topPadding"; write: "setTopPadding" }
-        Property { name: "leftPadding"; type: "double"; read: "leftPadding"; write: "setLeftPadding" }
-        Property { name: "rightPadding"; type: "double"; read: "rightPadding"; write: "setRightPadding" }
+        Property { name: "icon"; type: "QQuickIcon"; read: "icon"; write: "setIcon"; index: 0; isFinal: true }
+        Property { name: "text"; type: "QString"; read: "text"; write: "setText"; index: 1; isFinal: true }
+        Property { name: "font"; type: "QFont"; read: "font"; write: "setFont"; index: 2; isFinal: true }
+        Property { name: "color"; type: "QColor"; read: "color"; write: "setColor"; index: 3; isFinal: true }
+        Property {
+            name: "display"
+            type: "Display"
+            read: "display"
+            write: "setDisplay"
+            index: 4
+            isFinal: true
+        }
+        Property {
+            name: "spacing"
+            type: "double"
+            read: "spacing"
+            write: "setSpacing"
+            index: 5
+            isFinal: true
+        }
+        Property {
+            name: "mirrored"
+            type: "bool"
+            read: "isMirrored"
+            write: "setMirrored"
+            index: 6
+            isFinal: true
+        }
+        Property {
+            name: "alignment"
+            type: "Qt::Alignment"
+            read: "alignment"
+            write: "setAlignment"
+            index: 7
+            isFinal: true
+        }
+        Property {
+            name: "topPadding"
+            type: "double"
+            read: "topPadding"
+            write: "setTopPadding"
+            index: 8
+            isFinal: true
+        }
+        Property {
+            name: "leftPadding"
+            type: "double"
+            read: "leftPadding"
+            write: "setLeftPadding"
+            index: 9
+            isFinal: true
+        }
+        Property {
+            name: "rightPadding"
+            type: "double"
+            read: "rightPadding"
+            write: "setRightPadding"
+            index: 10
+            isFinal: true
+        }
         Property {
             name: "bottomPadding"
             type: "double"
             read: "bottomPadding"
             write: "setBottomPadding"
+            index: 11
+            isFinal: true
         }
-    }
-    Component {
-        file: "qquickimplicitsizeitem_p.h"
-        name: "QQuickImplicitSizeItem"
-        accessSemantics: "reference"
-        defaultProperty: "data"
-        prototype: "QQuickItem"
-        Property { name: "implicitWidth"; type: "double"; isReadonly: true; read: "implicitWidth" }
-        Property { name: "implicitHeight"; type: "double"; isReadonly: true; read: "implicitHeight" }
     }
     Component {
         file: "private/qquickitemgroup_p.h"
@@ -179,9 +307,10 @@ Module {
             "QtQuick.Controls.impl/ItemGroup 2.4",
             "QtQuick.Controls.impl/ItemGroup 2.7",
             "QtQuick.Controls.impl/ItemGroup 2.11",
-            "QtQuick.Controls.impl/ItemGroup 6.0"
+            "QtQuick.Controls.impl/ItemGroup 6.0",
+            "QtQuick.Controls.impl/ItemGroup 6.2"
         ]
-        exportMetaObjectRevisions: [514, 516, 519, 523, 1536]
+        exportMetaObjectRevisions: [514, 516, 519, 523, 1536, 1538]
     }
     Component {
         file: "private/qquickmnemoniclabel_p.h"
@@ -196,37 +325,68 @@ Module {
             "QtQuick.Controls.impl/MnemonicLabel 2.9",
             "QtQuick.Controls.impl/MnemonicLabel 2.10",
             "QtQuick.Controls.impl/MnemonicLabel 2.11",
-            "QtQuick.Controls.impl/MnemonicLabel 6.0"
+            "QtQuick.Controls.impl/MnemonicLabel 6.0",
+            "QtQuick.Controls.impl/MnemonicLabel 6.2"
         ]
-        exportMetaObjectRevisions: [515, 516, 518, 519, 521, 522, 523, 1536]
-        Property { name: "text"; type: "QString"; read: "text"; write: "setText" }
+        exportMetaObjectRevisions: [
+            515,
+            516,
+            518,
+            519,
+            521,
+            522,
+            523,
+            1536,
+            1538
+        ]
+        Property { name: "text"; type: "QString"; read: "text"; write: "setText"; index: 0; isFinal: true }
         Property {
             name: "mnemonicVisible"
             type: "bool"
             read: "isMnemonicVisible"
             write: "setMnemonicVisible"
+            index: 1
+            isFinal: true
         }
     }
     Component {
-        file: "qquickoverlay_p.h"
+        file: "private/qquickoverlay_p.h"
         name: "QQuickOverlayAttached"
         accessSemantics: "reference"
         prototype: "QObject"
         Property {
             name: "overlay"
             type: "QQuickOverlay"
-            isReadonly: true
             isPointer: true
             read: "overlay"
+            notify: "overlayChanged"
+            index: 0
+            isReadonly: true
+            isFinal: true
         }
-        Property { name: "modal"; type: "QQmlComponent"; isPointer: true; read: "modal"; write: "setModal" }
+        Property {
+            name: "modal"
+            type: "QQmlComponent"
+            isPointer: true
+            read: "modal"
+            write: "setModal"
+            notify: "modalChanged"
+            index: 1
+            isFinal: true
+        }
         Property {
             name: "modeless"
             type: "QQmlComponent"
             isPointer: true
             read: "modeless"
             write: "setModeless"
+            notify: "modelessChanged"
+            index: 2
+            isFinal: true
         }
+        Signal { name: "overlayChanged" }
+        Signal { name: "modalChanged" }
+        Signal { name: "modelessChanged" }
         Signal { name: "pressed" }
         Signal { name: "released" }
     }
@@ -235,6 +395,7 @@ Module {
         name: "QQuickOverlay"
         accessSemantics: "reference"
         defaultProperty: "data"
+        parentProperty: "parent"
         prototype: "QQuickItem"
         exports: [
             "QtQuick.Controls.impl/Overlay 2.3",
@@ -246,14 +407,28 @@ Module {
         isCreatable: false
         exportMetaObjectRevisions: [515, 516, 519, 523, 1536]
         attachedType: "QQuickOverlayAttached"
-        Property { name: "modal"; type: "QQmlComponent"; isPointer: true; read: "modal"; write: "setModal" }
+        Property {
+            name: "modal"
+            type: "QQmlComponent"
+            isPointer: true
+            read: "modal"
+            write: "setModal"
+            notify: "modalChanged"
+            index: 0
+            isFinal: true
+        }
         Property {
             name: "modeless"
             type: "QQmlComponent"
             isPointer: true
             read: "modeless"
             write: "setModeless"
+            notify: "modelessChanged"
+            index: 1
+            isFinal: true
         }
+        Signal { name: "modalChanged" }
+        Signal { name: "modelessChanged" }
         Signal { name: "pressed" }
         Signal { name: "released" }
     }
@@ -271,16 +446,56 @@ Module {
             "QtQuick.Controls.impl/PaddedRectangle 6.0"
         ]
         exportMetaObjectRevisions: [512, 513, 516, 519, 523, 1536]
-        Property { name: "padding"; type: "double"; read: "padding"; write: "setPadding" }
-        Property { name: "topPadding"; type: "double"; read: "topPadding"; write: "setTopPadding" }
-        Property { name: "leftPadding"; type: "double"; read: "leftPadding"; write: "setLeftPadding" }
-        Property { name: "rightPadding"; type: "double"; read: "rightPadding"; write: "setRightPadding" }
+        Property {
+            name: "padding"
+            type: "double"
+            read: "padding"
+            write: "setPadding"
+            notify: "paddingChanged"
+            index: 0
+            isFinal: true
+        }
+        Property {
+            name: "topPadding"
+            type: "double"
+            read: "topPadding"
+            write: "setTopPadding"
+            notify: "topPaddingChanged"
+            index: 1
+            isFinal: true
+        }
+        Property {
+            name: "leftPadding"
+            type: "double"
+            read: "leftPadding"
+            write: "setLeftPadding"
+            notify: "leftPaddingChanged"
+            index: 2
+            isFinal: true
+        }
+        Property {
+            name: "rightPadding"
+            type: "double"
+            read: "rightPadding"
+            write: "setRightPadding"
+            notify: "rightPaddingChanged"
+            index: 3
+            isFinal: true
+        }
         Property {
             name: "bottomPadding"
             type: "double"
             read: "bottomPadding"
             write: "setBottomPadding"
+            notify: "bottomPaddingChanged"
+            index: 4
+            isFinal: true
         }
+        Signal { name: "paddingChanged" }
+        Signal { name: "topPaddingChanged" }
+        Signal { name: "leftPaddingChanged" }
+        Signal { name: "rightPaddingChanged" }
+        Signal { name: "bottomPaddingChanged" }
     }
     Component {
         file: "private/qquickplaceholdertext_p.h"
@@ -296,7 +511,8 @@ Module {
             "QtQuick.Controls.impl/PlaceholderText 2.9",
             "QtQuick.Controls.impl/PlaceholderText 2.10",
             "QtQuick.Controls.impl/PlaceholderText 2.11",
-            "QtQuick.Controls.impl/PlaceholderText 6.0"
+            "QtQuick.Controls.impl/PlaceholderText 6.0",
+            "QtQuick.Controls.impl/PlaceholderText 6.2"
         ]
         exportMetaObjectRevisions: [
             514,
@@ -307,7 +523,8 @@ Module {
             521,
             522,
             523,
-            1536
+            1536,
+            1538
         ]
         Method { name: "updateAlignment" }
     }
@@ -323,8 +540,26 @@ Module {
         isCreatable: false
         exportMetaObjectRevisions: [525, 1536]
         attachedType: "QQuickSplitHandleAttached"
-        Property { name: "hovered"; type: "bool"; isReadonly: true; read: "isHovered" }
-        Property { name: "pressed"; type: "bool"; isReadonly: true; read: "isPressed" }
+        Property {
+            name: "hovered"
+            type: "bool"
+            read: "isHovered"
+            notify: "hoveredChanged"
+            index: 0
+            isReadonly: true
+            isFinal: true
+        }
+        Property {
+            name: "pressed"
+            type: "bool"
+            read: "isPressed"
+            notify: "pressedChanged"
+            index: 1
+            isReadonly: true
+            isFinal: true
+        }
+        Signal { name: "hoveredChanged" }
+        Signal { name: "pressedChanged" }
     }
     Component {
         file: "private/qquickchecklabel_p.h"
@@ -394,68 +629,222 @@ Module {
             name: "FontSizeMode"
             values: ["FixedSize", "HorizontalFit", "VerticalFit", "Fit"]
         }
-        Property { name: "text"; type: "QString"; read: "text"; write: "setText" }
-        Property { name: "font"; type: "QFont"; read: "font"; write: "setFont" }
-        Property { name: "color"; type: "QColor"; read: "color"; write: "setColor" }
-        Property { name: "linkColor"; type: "QColor"; read: "linkColor"; write: "setLinkColor" }
-        Property { name: "style"; type: "TextStyle"; read: "style"; write: "setStyle" }
-        Property { name: "styleColor"; type: "QColor"; read: "styleColor"; write: "setStyleColor" }
-        Property { name: "horizontalAlignment"; type: "HAlignment"; read: "hAlign"; write: "setHAlign" }
+        Property {
+            name: "text"
+            type: "QString"
+            read: "text"
+            write: "setText"
+            notify: "textChanged"
+            index: 0
+        }
+        Property {
+            name: "font"
+            type: "QFont"
+            read: "font"
+            write: "setFont"
+            notify: "fontChanged"
+            index: 1
+        }
+        Property {
+            name: "color"
+            type: "QColor"
+            read: "color"
+            write: "setColor"
+            notify: "colorChanged"
+            index: 2
+        }
+        Property {
+            name: "linkColor"
+            type: "QColor"
+            read: "linkColor"
+            write: "setLinkColor"
+            notify: "linkColorChanged"
+            index: 3
+        }
+        Property {
+            name: "style"
+            type: "TextStyle"
+            read: "style"
+            write: "setStyle"
+            notify: "styleChanged"
+            index: 4
+        }
+        Property {
+            name: "styleColor"
+            type: "QColor"
+            read: "styleColor"
+            write: "setStyleColor"
+            notify: "styleColorChanged"
+            index: 5
+        }
+        Property {
+            name: "horizontalAlignment"
+            type: "HAlignment"
+            read: "hAlign"
+            write: "setHAlign"
+            notify: "horizontalAlignmentChanged"
+            index: 6
+        }
         Property {
             name: "effectiveHorizontalAlignment"
             type: "HAlignment"
-            isReadonly: true
             read: "effectiveHAlign"
+            notify: "effectiveHorizontalAlignmentChanged"
+            index: 7
+            isReadonly: true
         }
-        Property { name: "verticalAlignment"; type: "VAlignment"; read: "vAlign"; write: "setVAlign" }
-        Property { name: "wrapMode"; type: "WrapMode"; read: "wrapMode"; write: "setWrapMode" }
-        Property { name: "lineCount"; type: "int"; isReadonly: true; read: "lineCount" }
-        Property { name: "truncated"; type: "bool"; isReadonly: true; read: "truncated" }
+        Property {
+            name: "verticalAlignment"
+            type: "VAlignment"
+            read: "vAlign"
+            write: "setVAlign"
+            notify: "verticalAlignmentChanged"
+            index: 8
+        }
+        Property {
+            name: "wrapMode"
+            type: "WrapMode"
+            read: "wrapMode"
+            write: "setWrapMode"
+            notify: "wrapModeChanged"
+            index: 9
+        }
+        Property {
+            name: "lineCount"
+            type: "int"
+            read: "lineCount"
+            notify: "lineCountChanged"
+            index: 10
+            isReadonly: true
+        }
+        Property {
+            name: "truncated"
+            type: "bool"
+            read: "truncated"
+            notify: "truncatedChanged"
+            index: 11
+            isReadonly: true
+        }
         Property {
             name: "maximumLineCount"
             type: "int"
             read: "maximumLineCount"
             write: "setMaximumLineCount"
+            notify: "maximumLineCountChanged"
+            index: 12
         }
-        Property { name: "textFormat"; type: "TextFormat"; read: "textFormat"; write: "setTextFormat" }
-        Property { name: "elide"; type: "TextElideMode"; read: "elideMode"; write: "setElideMode" }
-        Property { name: "contentWidth"; type: "double"; isReadonly: true; read: "contentWidth" }
-        Property { name: "contentHeight"; type: "double"; isReadonly: true; read: "contentHeight" }
-        Property { name: "paintedWidth"; type: "double"; isReadonly: true; read: "contentWidth" }
-        Property { name: "paintedHeight"; type: "double"; isReadonly: true; read: "contentHeight" }
-        Property { name: "lineHeight"; type: "double"; read: "lineHeight"; write: "setLineHeight" }
+        Property {
+            name: "textFormat"
+            type: "TextFormat"
+            read: "textFormat"
+            write: "setTextFormat"
+            notify: "textFormatChanged"
+            index: 13
+        }
+        Property {
+            name: "elide"
+            type: "TextElideMode"
+            read: "elideMode"
+            write: "setElideMode"
+            notify: "elideModeChanged"
+            index: 14
+        }
+        Property {
+            name: "contentWidth"
+            type: "double"
+            read: "contentWidth"
+            notify: "contentWidthChanged"
+            index: 15
+            isReadonly: true
+        }
+        Property {
+            name: "contentHeight"
+            type: "double"
+            read: "contentHeight"
+            notify: "contentHeightChanged"
+            index: 16
+            isReadonly: true
+        }
+        Property {
+            name: "paintedWidth"
+            type: "double"
+            read: "contentWidth"
+            notify: "contentWidthChanged"
+            index: 17
+            isReadonly: true
+        }
+        Property {
+            name: "paintedHeight"
+            type: "double"
+            read: "contentHeight"
+            notify: "contentHeightChanged"
+            index: 18
+            isReadonly: true
+        }
+        Property {
+            name: "lineHeight"
+            type: "double"
+            read: "lineHeight"
+            write: "setLineHeight"
+            notify: "lineHeightChanged"
+            index: 19
+        }
         Property {
             name: "lineHeightMode"
             type: "LineHeightMode"
             read: "lineHeightMode"
             write: "setLineHeightMode"
+            notify: "lineHeightModeChanged"
+            index: 20
         }
-        Property { name: "baseUrl"; type: "QUrl"; read: "baseUrl"; write: "setBaseUrl" }
+        Property {
+            name: "baseUrl"
+            type: "QUrl"
+            read: "baseUrl"
+            write: "setBaseUrl"
+            notify: "baseUrlChanged"
+            index: 21
+        }
         Property {
             name: "minimumPixelSize"
             type: "int"
             read: "minimumPixelSize"
             write: "setMinimumPixelSize"
+            notify: "minimumPixelSizeChanged"
+            index: 22
         }
         Property {
             name: "minimumPointSize"
             type: "int"
             read: "minimumPointSize"
             write: "setMinimumPointSize"
+            notify: "minimumPointSizeChanged"
+            index: 23
         }
         Property {
             name: "fontSizeMode"
             type: "FontSizeMode"
             read: "fontSizeMode"
             write: "setFontSizeMode"
+            notify: "fontSizeModeChanged"
+            index: 24
         }
-        Property { name: "renderType"; type: "RenderType"; read: "renderType"; write: "setRenderType" }
+        Property {
+            name: "renderType"
+            type: "RenderType"
+            read: "renderType"
+            write: "setRenderType"
+            notify: "renderTypeChanged"
+            index: 25
+        }
         Property {
             name: "hoveredLink"
             revision: 514
             type: "QString"
-            isReadonly: true
             read: "hoveredLink"
+            notify: "linkHovered"
+            index: 26
+            isReadonly: true
         }
         Property {
             name: "renderTypeQuality"
@@ -463,14 +852,26 @@ Module {
             type: "int"
             read: "renderTypeQuality"
             write: "setRenderTypeQuality"
+            notify: "renderTypeQualityChanged"
+            index: 27
         }
-        Property { name: "padding"; revision: 518; type: "double"; read: "padding"; write: "setPadding" }
+        Property {
+            name: "padding"
+            revision: 518
+            type: "double"
+            read: "padding"
+            write: "setPadding"
+            notify: "paddingChanged"
+            index: 28
+        }
         Property {
             name: "topPadding"
             revision: 518
             type: "double"
             read: "topPadding"
             write: "setTopPadding"
+            notify: "topPaddingChanged"
+            index: 29
         }
         Property {
             name: "leftPadding"
@@ -478,6 +879,8 @@ Module {
             type: "double"
             read: "leftPadding"
             write: "setLeftPadding"
+            notify: "leftPaddingChanged"
+            index: 30
         }
         Property {
             name: "rightPadding"
@@ -485,6 +888,8 @@ Module {
             type: "double"
             read: "rightPadding"
             write: "setRightPadding"
+            notify: "rightPaddingChanged"
+            index: 31
         }
         Property {
             name: "bottomPadding"
@@ -492,9 +897,27 @@ Module {
             type: "double"
             read: "bottomPadding"
             write: "setBottomPadding"
+            notify: "bottomPaddingChanged"
+            index: 32
         }
-        Property { name: "fontInfo"; revision: 521; type: "QJSValue"; isReadonly: true; read: "fontInfo" }
-        Property { name: "advance"; revision: 522; type: "QSizeF"; isReadonly: true; read: "advance" }
+        Property {
+            name: "fontInfo"
+            revision: 521
+            type: "QJSValue"
+            read: "fontInfo"
+            notify: "fontInfoChanged"
+            index: 33
+            isReadonly: true
+        }
+        Property {
+            name: "advance"
+            revision: 522
+            type: "QSizeF"
+            read: "advance"
+            notify: "contentSizeChanged"
+            index: 34
+            isReadonly: true
+        }
         Signal {
             name: "textChanged"
             Parameter { name: "text"; type: "QString" }
@@ -512,10 +935,13 @@ Module {
             name: "fontChanged"
             Parameter { name: "font"; type: "QFont" }
         }
+        Signal { name: "colorChanged" }
+        Signal { name: "linkColorChanged" }
         Signal {
             name: "styleChanged"
             Parameter { name: "style"; type: "QQuickText::TextStyle" }
         }
+        Signal { name: "styleColorChanged" }
         Signal {
             name: "horizontalAlignmentChanged"
             Parameter { name: "alignment"; type: "QQuickText::HAlignment" }
@@ -524,6 +950,10 @@ Module {
             name: "verticalAlignmentChanged"
             Parameter { name: "alignment"; type: "QQuickText::VAlignment" }
         }
+        Signal { name: "wrapModeChanged" }
+        Signal { name: "lineCountChanged" }
+        Signal { name: "truncatedChanged" }
+        Signal { name: "maximumLineCountChanged" }
         Signal {
             name: "textFormatChanged"
             Parameter { name: "textFormat"; type: "QQuickText::TextFormat" }
@@ -549,10 +979,16 @@ Module {
             name: "lineHeightModeChanged"
             Parameter { name: "mode"; type: "LineHeightMode" }
         }
+        Signal { name: "fontSizeModeChanged" }
+        Signal { name: "minimumPixelSizeChanged" }
+        Signal { name: "minimumPointSizeChanged" }
+        Signal { name: "effectiveHorizontalAlignmentChanged" }
         Signal {
             name: "lineLaidOut"
             Parameter { name: "line"; type: "QQuickTextLine"; isPointer: true }
         }
+        Signal { name: "baseUrlChanged" }
+        Signal { name: "renderTypeChanged" }
         Signal { name: "paddingChanged"; revision: 518 }
         Signal { name: "topPaddingChanged"; revision: 518 }
         Signal { name: "leftPaddingChanged"; revision: 518 }
@@ -577,6 +1013,7 @@ Module {
         name: "QQuickTumblerView"
         accessSemantics: "reference"
         defaultProperty: "data"
+        parentProperty: "parent"
         prototype: "QQuickItem"
         exports: [
             "QtQuick.Controls.impl/TumblerView 2.1",
@@ -586,14 +1023,34 @@ Module {
             "QtQuick.Controls.impl/TumblerView 6.0"
         ]
         exportMetaObjectRevisions: [513, 516, 519, 523, 1536]
-        Property { name: "model"; type: "QVariant"; read: "model"; write: "setModel" }
+        Property {
+            name: "model"
+            type: "QVariant"
+            read: "model"
+            write: "setModel"
+            notify: "modelChanged"
+            index: 0
+        }
         Property {
             name: "delegate"
             type: "QQmlComponent"
             isPointer: true
             read: "delegate"
             write: "setDelegate"
+            notify: "delegateChanged"
+            index: 1
         }
-        Property { name: "path"; type: "QQuickPath"; isPointer: true; read: "path"; write: "setPath" }
+        Property {
+            name: "path"
+            type: "QQuickPath"
+            isPointer: true
+            read: "path"
+            write: "setPath"
+            notify: "pathChanged"
+            index: 2
+        }
+        Signal { name: "modelChanged" }
+        Signal { name: "delegateChanged" }
+        Signal { name: "pathChanged" }
     }
 }

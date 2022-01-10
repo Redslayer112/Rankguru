@@ -382,6 +382,9 @@ public:
     enum Country
     {
         AnyCountry,
+%If (Qt_6_2_0 -)
+        AnyTerritory,
+%End
         Afghanistan,
         Albania,
         Algeria,
@@ -664,6 +667,15 @@ public:
         UnitedStatesOutlyingIslands,
         VaticanCity,
         WallisAndFutuna,
+%If (Qt_6_2_0 -)
+        NauruTerritory,
+%End
+%If (Qt_6_2_0 -)
+        TokelauTerritory,
+%End
+%If (Qt_6_2_0 -)
+        TuvaluTerritory,
+%End
     };
 
     enum NumberOption /BaseType=Flag/
@@ -681,6 +693,7 @@ public:
     QLocale();
     explicit QLocale(const QString &name);
     QLocale(QLocale::Language language, QLocale::Country country = QLocale::AnyCountry);
+    QLocale(QLocale::Language language, QLocale::Script script, QLocale::Country country);
     QLocale(const QLocale &other);
     ~QLocale();
     QLocale::Language language() const;
@@ -917,7 +930,6 @@ public:
         CurrencyDisplayName,
     };
 
-    QLocale(QLocale::Language language, QLocale::Script script, QLocale::Country country);
     QLocale::Script script() const;
     QString bcp47Name() const;
     QString nativeLanguageName() const;
@@ -930,7 +942,12 @@ public:
     QString toCurrencyString(double, const QString &symbol = QString(), int precision = -1) const;
     QStringList uiLanguages() const;
     static QString scriptToString(QLocale::Script script);
+%If (Qt_6_2_0 -)
+    static QList<QLocale> matchingLocales(QLocale::Language language, QLocale::Script script, QLocale::Territory territory);
+%End
+%If (- Qt_6_2_0)
     static QList<QLocale> matchingLocales(QLocale::Language language, QLocale::Script script, QLocale::Country country);
+%End
 
     enum QuotationStyle
     {
@@ -1072,6 +1089,24 @@ public:
 %End
 %If (Qt_6_1_0 -)
     static QLocale::Script codeToScript(QStringView scriptCode);
+%End
+%If (Qt_6_2_0 -)
+    typedef QLocale::Country Territory;
+%End
+%If (Qt_6_2_0 -)
+    QLocale::Territory territory() const;
+%End
+%If (Qt_6_2_0 -)
+    QString nativeTerritoryName() const;
+%End
+%If (Qt_6_2_0 -)
+    static QString territoryToCode(QLocale::Territory territory);
+%End
+%If (Qt_6_2_0 -)
+    static QLocale::Territory codeToTerritory(QStringView territoryCode);
+%End
+%If (Qt_6_2_0 -)
+    static QString territoryToString(QLocale::Territory territory);
 %End
 };
 

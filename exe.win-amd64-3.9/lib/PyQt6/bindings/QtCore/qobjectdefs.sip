@@ -34,6 +34,9 @@ static void qtcore_invokeMethod_exception()
 }
 %End
 
+%If (Qt_6_2_0 -)
+    QMetaType metaType() const;
+%End
     const char *className() const;
     const QMetaObject *superClass() const;
     QMetaProperty userProperty() const;

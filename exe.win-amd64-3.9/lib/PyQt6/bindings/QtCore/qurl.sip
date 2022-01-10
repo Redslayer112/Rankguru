@@ -59,7 +59,7 @@ public:
         }
 %End
 
-    enum UrlFormattingOption /BaseType=Flag/
+    enum UrlFormattingOption /BaseType=IntFlag/
     {
         None,
         RemoveScheme,
@@ -78,7 +78,7 @@ public:
 
     typedef QFlags<QUrl::UrlFormattingOption> FormattingOptions;
 
-    enum ComponentFormattingOption /BaseType=Flag/
+    enum ComponentFormattingOption /BaseType=IntFlag/
     {
         PrettyDecoded,
         EncodeSpaces,
@@ -120,7 +120,9 @@ public:
     static QUrl fromLocalFile(const QString &localfile);
     QString toLocalFile() const;
     QString toString(QUrl::FormattingOptions options = QUrl::FormattingOptions(QUrl::PrettyDecoded)) const;
+    QString toString(QUrl::ComponentFormattingOptions options) const;
     QByteArray toEncoded(QUrl::FormattingOptions options = QUrl::FullyEncoded) const;
+    QByteArray toEncoded(QUrl::ComponentFormattingOptions options) const;
     static QUrl fromEncoded(const QByteArray &u, QUrl::ParsingMode mode = QUrl::TolerantMode);
     void detach();
     bool isDetached() const;
@@ -140,6 +142,7 @@ public:
     void swap(QUrl &other /Constrained/);
     bool isLocalFile() const;
     QString toDisplayString(QUrl::FormattingOptions options = QUrl::FormattingOptions(QUrl::PrettyDecoded)) const;
+    QString toDisplayString(QUrl::ComponentFormattingOptions options) const;
     void setQuery(const QString &query, QUrl::ParsingMode mode = QUrl::TolerantMode);
     void setQuery(const QUrlQuery &query);
     QString query(QUrl::ComponentFormattingOptions options = QUrl::PrettyDecoded) const;

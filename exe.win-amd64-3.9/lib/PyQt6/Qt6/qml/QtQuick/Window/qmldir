@@ -1,6 +1,8 @@
 module QtQuick.Window
-plugin quickwindow
+linktarget Qt6::quickwindow
+plugin quickwindowplugin
 classname QtQuick_WindowPlugin
-typeinfo plugins.qmltypes
+typeinfo quickwindow.qmltypes
 import QtQuick auto
+prefer :/qt-project.org/imports/QtQuick/Window/
 

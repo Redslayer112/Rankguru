@@ -20,6 +20,8 @@
 // WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 
 
+%If (!PyQt_OpenGL_ES2)
+
 class QOpenGLTimerQuery : QObject
 {
 %TypeHeaderCode
@@ -40,6 +42,9 @@ public:
     bool isResultAvailable() const;
     GLuint64 waitForResult() const /ReleaseGIL/;
 };
+
+%End
+%If (!PyQt_OpenGL_ES2)
 
 class QOpenGLTimeMonitor : QObject
 {
@@ -62,3 +67,5 @@ public:
     QList<GLuint64> waitForIntervals() const /ReleaseGIL/;
     void reset();
 };
+
+%End

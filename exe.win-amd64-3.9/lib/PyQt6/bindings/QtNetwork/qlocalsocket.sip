@@ -149,4 +149,24 @@ protected:
 %End
 
     virtual qint64 skipData(qint64 maxSize) /ReleaseGIL/;
+
+public:
+%If (Qt_6_2_0 -)
+
+    enum SocketOption /BaseType=Flag/
+    {
+        NoOptions,
+        AbstractNamespaceOption,
+    };
+
+%End
+%If (Qt_6_2_0 -)
+    typedef QFlags<QLocalSocket::SocketOption> SocketOptions;
+%End
+%If (Qt_6_2_0 -)
+    void setSocketOptions(QLocalSocket::SocketOptions option);
+%End
+%If (Qt_6_2_0 -)
+    QLocalSocket::SocketOptions socketOptions() const;
+%End
 };

@@ -45,13 +45,10 @@ T.Button {
 
     readonly property bool __nativeBackground: background instanceof NativeStyle.StyleItem
 
-    // Since QQuickControl will subtract the insets from the control size to
-    // figure out the background size, we need to reverse that here, otherwise
-    // the control ends up too big.
-    implicitWidth: implicitBackgroundWidth + leftInset + rightInset
-    implicitHeight: implicitBackgroundHeight + topInset + bottomInset
-
-    font.pixelSize: __nativeBackground ? background.styleFont(control).pixelSize : undefined
+    implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
+                            implicitContentWidth + leftPadding + rightPadding)
+    implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
+                             implicitContentHeight + topPadding + bottomPadding)
 
     leftPadding: __nativeBackground ? background.contentPadding.left : 5
     rightPadding: __nativeBackground ? background.contentPadding.right : 5
@@ -66,8 +63,7 @@ T.Button {
 
     icon.width: 24
     icon.height: 24
-    icon.color: control.checked || control.highlighted ? control.palette.brightText :
-                control.flat && !control.down ? (control.visualFocus ? control.palette.highlight : control.palette.windowText) : control.palette.buttonText
+    icon.color: control.palette.buttonText
 
     contentItem: IconLabel {
         spacing: control.spacing
@@ -77,7 +73,6 @@ T.Button {
         icon: control.icon
         text: control.text
         font: control.font
-        color: control.checked || control.highlighted ? control.palette.brightText :
-                                                        control.flat && !control.down ? (control.visualFocus ? control.palette.highlight : control.palette.windowText) : control.palette.buttonText
+        color: control.palette.buttonText
     }
 }

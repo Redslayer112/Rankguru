@@ -109,4 +109,9 @@ public:
 
 private:
     QWidgetItem(const QWidgetItem &);
+
+public:
+%If (Qt_6_2_0 -)
+    virtual int minimumHeightForWidth(int) const;
+%End
 };

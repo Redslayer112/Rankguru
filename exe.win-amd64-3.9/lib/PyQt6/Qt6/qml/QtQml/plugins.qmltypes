@@ -54,7 +54,15 @@ Module {
         accessSemantics: "reference"
         exports: ["QtQml/QtObject 2.0", "QtQml/QtObject 6.0"]
         exportMetaObjectRevisions: [512, 1536]
-        Property { name: "objectName"; type: "QString"; read: "objectName"; write: "setObjectName" }
+        Property {
+            name: "objectName"
+            type: "QString"
+            bindable: "bindableObjectName"
+            read: "objectName"
+            write: "setObjectName"
+            notify: "objectNameChanged"
+            index: 0
+        }
         Signal {
             name: "objectNameChanged"
             Parameter { name: "objectName"; type: "QString" }
@@ -75,12 +83,44 @@ Module {
         name: "QQmlApplication"
         accessSemantics: "reference"
         prototype: "QObject"
-        Property { name: "arguments"; type: "QStringList"; isReadonly: true; read: "args" }
-        Property { name: "name"; type: "QString"; read: "name"; write: "setName" }
-        Property { name: "version"; type: "QString"; read: "version"; write: "setVersion" }
-        Property { name: "organization"; type: "QString"; read: "organization"; write: "setOrganization" }
-        Property { name: "domain"; type: "QString"; read: "domain"; write: "setDomain" }
+        Property { name: "arguments"; type: "QStringList"; read: "args"; index: 0; isReadonly: true }
+        Property {
+            name: "name"
+            type: "QString"
+            read: "name"
+            write: "setName"
+            notify: "nameChanged"
+            index: 1
+        }
+        Property {
+            name: "version"
+            type: "QString"
+            read: "version"
+            write: "setVersion"
+            notify: "versionChanged"
+            index: 2
+        }
+        Property {
+            name: "organization"
+            type: "QString"
+            read: "organization"
+            write: "setOrganization"
+            notify: "organizationChanged"
+            index: 3
+        }
+        Property {
+            name: "domain"
+            type: "QString"
+            read: "domain"
+            write: "setDomain"
+            notify: "domainChanged"
+            index: 4
+        }
         Signal { name: "aboutToQuit" }
+        Signal { name: "nameChanged" }
+        Signal { name: "versionChanged" }
+        Signal { name: "organizationChanged" }
+        Signal { name: "domainChanged" }
         Method {
             name: "setName"
             Parameter { name: "arg"; type: "QString" }
@@ -120,18 +160,35 @@ Module {
                 "RestoreBindingOrValue"
             ]
         }
-        Property { name: "target"; type: "QObject"; isPointer: true; read: "object"; write: "setObject" }
-        Property { name: "property"; type: "QString"; read: "property"; write: "setProperty" }
-        Property { name: "value"; type: "QJSValue"; read: "value"; write: "setValue" }
-        Property { name: "when"; type: "bool"; read: "when"; write: "setWhen" }
-        Property { name: "delayed"; revision: 520; type: "bool"; read: "delayed"; write: "setDelayed" }
+        Property {
+            name: "target"
+            type: "QObject"
+            isPointer: true
+            read: "object"
+            write: "setObject"
+            index: 0
+        }
+        Property { name: "property"; type: "QString"; read: "property"; write: "setProperty"; index: 1 }
+        Property { name: "value"; type: "QJSValue"; read: "value"; write: "setValue"; index: 2 }
+        Property { name: "when"; type: "bool"; read: "when"; write: "setWhen"; index: 3 }
+        Property {
+            name: "delayed"
+            revision: 520
+            type: "bool"
+            read: "delayed"
+            write: "setDelayed"
+            index: 4
+        }
         Property {
             name: "restoreMode"
             revision: 526
             type: "RestorationMode"
             read: "restoreMode"
             write: "setRestoreMode"
+            notify: "restoreModeChanged"
+            index: 5
         }
+        Signal { name: "restoreModeChanged" }
         Method { name: "targetValueChanged" }
     }
     Component {
@@ -150,9 +207,23 @@ Module {
             name: "Status"
             values: ["Null", "Ready", "Loading", "Error"]
         }
-        Property { name: "progress"; type: "double"; isReadonly: true; read: "progress" }
-        Property { name: "status"; type: "Status"; isReadonly: true; read: "status" }
-        Property { name: "url"; type: "QUrl"; isReadonly: true; read: "url" }
+        Property {
+            name: "progress"
+            type: "double"
+            read: "progress"
+            notify: "progressChanged"
+            index: 0
+            isReadonly: true
+        }
+        Property {
+            name: "status"
+            type: "Status"
+            read: "status"
+            notify: "statusChanged"
+            index: 1
+            isReadonly: true
+        }
+        Property { name: "url"; type: "QUrl"; read: "url"; index: 2; isReadonly: true }
         Signal {
             name: "statusChanged"
             Parameter { type: "QQmlComponent::Status" }
@@ -204,15 +275,34 @@ Module {
             "QtQml/Connections 2.3",
             "QtQml/Connections 6.0"
         ]
+        hasCustomParser: true
         exportMetaObjectRevisions: [512, 515, 1536]
-        Property { name: "target"; type: "QObject"; isPointer: true; read: "target"; write: "setTarget" }
-        Property { name: "enabled"; revision: 515; type: "bool"; read: "isEnabled"; write: "setEnabled" }
+        Property {
+            name: "target"
+            type: "QObject"
+            isPointer: true
+            read: "target"
+            write: "setTarget"
+            notify: "targetChanged"
+            index: 0
+        }
+        Property {
+            name: "enabled"
+            revision: 515
+            type: "bool"
+            read: "isEnabled"
+            write: "setEnabled"
+            notify: "enabledChanged"
+            index: 1
+        }
         Property {
             name: "ignoreUnknownSignals"
             type: "bool"
             read: "ignoreUnknownSignals"
             write: "setIgnoreUnknownSignals"
+            index: 2
         }
+        Signal { name: "targetChanged" }
         Signal { name: "enabledChanged"; revision: 515 }
     }
     Component {
@@ -339,15 +429,45 @@ Module {
         file: "private/qqmlvaluetype_p.h"
         name: "QQmlEasingValueType"
         accessSemantics: "value"
-        Property { name: "type"; type: "QQmlEasingEnums::Type"; read: "type"; write: "setType" }
-        Property { name: "amplitude"; type: "double"; read: "amplitude"; write: "setAmplitude" }
-        Property { name: "overshoot"; type: "double"; read: "overshoot"; write: "setOvershoot" }
-        Property { name: "period"; type: "double"; read: "period"; write: "setPeriod" }
+        Property {
+            name: "type"
+            type: "QQmlEasingEnums::Type"
+            read: "type"
+            write: "setType"
+            index: 0
+            isFinal: true
+        }
+        Property {
+            name: "amplitude"
+            type: "double"
+            read: "amplitude"
+            write: "setAmplitude"
+            index: 1
+            isFinal: true
+        }
+        Property {
+            name: "overshoot"
+            type: "double"
+            read: "overshoot"
+            write: "setOvershoot"
+            index: 2
+            isFinal: true
+        }
+        Property {
+            name: "period"
+            type: "double"
+            read: "period"
+            write: "setPeriod"
+            index: 3
+            isFinal: true
+        }
         Property {
             name: "bezierCurve"
             type: "QVariantList"
             read: "bezierCurve"
             write: "setBezierCurve"
+            index: 4
+            isFinal: true
         }
     }
     Component {
@@ -360,28 +480,46 @@ Module {
         file: "private/qqmlmodelindexvaluetype_p.h"
         name: "QQmlItemSelectionRangeValueType"
         accessSemantics: "value"
-        Property { name: "top"; type: "int"; isReadonly: true; read: "top" }
-        Property { name: "left"; type: "int"; isReadonly: true; read: "left" }
-        Property { name: "bottom"; type: "int"; isReadonly: true; read: "bottom" }
-        Property { name: "right"; type: "int"; isReadonly: true; read: "right" }
-        Property { name: "width"; type: "int"; isReadonly: true; read: "width" }
-        Property { name: "height"; type: "int"; isReadonly: true; read: "height" }
-        Property { name: "topLeft"; type: "QPersistentModelIndex"; isReadonly: true; read: "topLeft" }
+        Property { name: "top"; type: "int"; read: "top"; index: 0; isReadonly: true; isFinal: true }
+        Property { name: "left"; type: "int"; read: "left"; index: 1; isReadonly: true; isFinal: true }
+        Property { name: "bottom"; type: "int"; read: "bottom"; index: 2; isReadonly: true; isFinal: true }
+        Property { name: "right"; type: "int"; read: "right"; index: 3; isReadonly: true; isFinal: true }
+        Property { name: "width"; type: "int"; read: "width"; index: 4; isReadonly: true; isFinal: true }
+        Property { name: "height"; type: "int"; read: "height"; index: 5; isReadonly: true; isFinal: true }
+        Property {
+            name: "topLeft"
+            type: "QPersistentModelIndex"
+            read: "topLeft"
+            index: 6
+            isReadonly: true
+            isFinal: true
+        }
         Property {
             name: "bottomRight"
             type: "QPersistentModelIndex"
-            isReadonly: true
             read: "bottomRight"
+            index: 7
+            isReadonly: true
+            isFinal: true
         }
-        Property { name: "parent"; type: "QModelIndex"; isReadonly: true; read: "parent" }
-        Property { name: "valid"; type: "bool"; isReadonly: true; read: "isValid" }
-        Property { name: "empty"; type: "bool"; isReadonly: true; read: "isEmpty" }
+        Property {
+            name: "parent"
+            type: "QModelIndex"
+            read: "parent"
+            index: 8
+            isReadonly: true
+            isFinal: true
+        }
+        Property { name: "valid"; type: "bool"; read: "isValid"; index: 9; isReadonly: true; isFinal: true }
+        Property { name: "empty"; type: "bool"; read: "isEmpty"; index: 10; isReadonly: true; isFinal: true }
         Property {
             name: "model"
             type: "QAbstractItemModel"
-            isReadonly: true
             isPointer: true
             read: "model"
+            index: 11
+            isReadonly: true
+            isFinal: true
         }
         Method { name: "toString"; type: "QString" }
         Method {
@@ -459,6 +597,16 @@ Module {
                 "RejectTrailingZeroesAfterDot"
             ]
         }
+        Enum {
+            name: "DataSizeFormat"
+            values: [
+                "DataSizeBase1000",
+                "DataSizeSIQuantifiers",
+                "DataSizeIecFormat",
+                "DataSizeTraditionalFormat",
+                "DataSizeSIFormat"
+            ]
+        }
     }
     Component {
         file: "private/qqmlloggingcategory_p.h"
@@ -476,13 +624,14 @@ Module {
             name: "DefaultLogLevel"
             values: ["Debug", "Info", "Warning", "Critical", "Fatal"]
         }
-        Property { name: "name"; type: "QString"; read: "name"; write: "setName" }
+        Property { name: "name"; type: "QString"; read: "name"; write: "setName"; index: 0 }
         Property {
             name: "defaultLogLevel"
             revision: 524
             type: "DefaultLogLevel"
             read: "defaultLogLevel"
             write: "setDefaultLogLevel"
+            index: 1
         }
     }
     Component {
@@ -495,18 +644,34 @@ Module {
         file: "private/qqmlmodelindexvaluetype_p.h"
         name: "QQmlModelIndexValueType"
         accessSemantics: "value"
-        Property { name: "row"; type: "int"; isReadonly: true; read: "row" }
-        Property { name: "column"; type: "int"; isReadonly: true; read: "column" }
-        Property { name: "parent"; type: "QModelIndex"; isReadonly: true; read: "parent" }
-        Property { name: "valid"; type: "bool"; isReadonly: true; read: "isValid" }
+        Property { name: "row"; type: "int"; read: "row"; index: 0; isReadonly: true; isFinal: true }
+        Property { name: "column"; type: "int"; read: "column"; index: 1; isReadonly: true; isFinal: true }
+        Property {
+            name: "parent"
+            type: "QModelIndex"
+            read: "parent"
+            index: 2
+            isReadonly: true
+            isFinal: true
+        }
+        Property { name: "valid"; type: "bool"; read: "isValid"; index: 3; isReadonly: true; isFinal: true }
         Property {
             name: "model"
             type: "QAbstractItemModel"
-            isReadonly: true
             isPointer: true
             read: "model"
+            index: 4
+            isReadonly: true
+            isFinal: true
         }
-        Property { name: "internalId"; type: "qulonglong"; isReadonly: true; read: "internalId" }
+        Property {
+            name: "internalId"
+            type: "qulonglong"
+            read: "internalId"
+            index: 5
+            isReadonly: true
+            isFinal: true
+        }
         Method { name: "toString"; type: "QString" }
     }
     Component {
@@ -519,18 +684,34 @@ Module {
         file: "private/qqmlmodelindexvaluetype_p.h"
         name: "QQmlPersistentModelIndexValueType"
         accessSemantics: "value"
-        Property { name: "row"; type: "int"; isReadonly: true; read: "row" }
-        Property { name: "column"; type: "int"; isReadonly: true; read: "column" }
-        Property { name: "parent"; type: "QModelIndex"; isReadonly: true; read: "parent" }
-        Property { name: "valid"; type: "bool"; isReadonly: true; read: "isValid" }
+        Property { name: "row"; type: "int"; read: "row"; index: 0; isReadonly: true; isFinal: true }
+        Property { name: "column"; type: "int"; read: "column"; index: 1; isReadonly: true; isFinal: true }
+        Property {
+            name: "parent"
+            type: "QModelIndex"
+            read: "parent"
+            index: 2
+            isReadonly: true
+            isFinal: true
+        }
+        Property { name: "valid"; type: "bool"; read: "isValid"; index: 3; isReadonly: true; isFinal: true }
         Property {
             name: "model"
             type: "QAbstractItemModel"
-            isReadonly: true
             isPointer: true
             read: "model"
+            index: 4
+            isReadonly: true
+            isFinal: true
         }
-        Property { name: "internalId"; type: "qulonglong"; isReadonly: true; read: "internalId" }
+        Property {
+            name: "internalId"
+            type: "qulonglong"
+            read: "internalId"
+            index: 5
+            isReadonly: true
+            isFinal: true
+        }
         Method { name: "toString"; type: "QString" }
     }
     Component {
@@ -538,8 +719,8 @@ Module {
         name: "QQmlPlatform"
         accessSemantics: "reference"
         prototype: "QObject"
-        Property { name: "os"; type: "QString"; isReadonly: true; read: "os" }
-        Property { name: "pluginName"; type: "QString"; isReadonly: true; read: "pluginName" }
+        Property { name: "os"; type: "QString"; read: "os"; index: 0; isReadonly: true }
+        Property { name: "pluginName"; type: "QString"; read: "pluginName"; index: 1; isReadonly: true }
     }
     Component {
         file: "private/qqmlvaluetype_p.h"
@@ -554,8 +735,8 @@ Module {
         file: "private/qqmlvaluetype_p.h"
         name: "QQmlPointFValueType"
         accessSemantics: "value"
-        Property { name: "x"; type: "double"; read: "x"; write: "setX" }
-        Property { name: "y"; type: "double"; read: "y"; write: "setY" }
+        Property { name: "x"; type: "double"; read: "x"; write: "setX"; index: 0; isFinal: true }
+        Property { name: "y"; type: "double"; read: "y"; write: "setY"; index: 1; isFinal: true }
         Method { name: "toString"; type: "QString" }
     }
     Component {
@@ -568,22 +749,24 @@ Module {
         file: "private/qqmlvaluetype_p.h"
         name: "QQmlPointValueType"
         accessSemantics: "value"
-        Property { name: "x"; type: "int"; read: "x"; write: "setX" }
-        Property { name: "y"; type: "int"; read: "y"; write: "setY" }
+        Property { name: "x"; type: "int"; read: "x"; write: "setX"; index: 0; isFinal: true }
+        Property { name: "y"; type: "int"; read: "y"; write: "setY"; index: 1; isFinal: true }
         Method { name: "toString"; type: "QString" }
     }
     Component {
-        file: "private/qqmlvaluetype_p.h"
+        file: "qqmlproperty.h"
         name: "QQmlProperty"
         accessSemantics: "value"
-        extension: "QQmlPropertyValueType"
-    }
-    Component {
-        file: "private/qqmlvaluetype_p.h"
-        name: "QQmlPropertyValueType"
-        accessSemantics: "value"
-        Property { name: "object"; type: "QObject"; isReadonly: true; isPointer: true; read: "object" }
-        Property { name: "name"; type: "QString"; isReadonly: true; read: "name" }
+        Property {
+            name: "object"
+            type: "QObject"
+            isPointer: true
+            read: "object"
+            index: 0
+            isReadonly: true
+            isFinal: true
+        }
+        Property { name: "name"; type: "QString"; read: "name"; index: 1; isReadonly: true; isFinal: true }
     }
     Component {
         file: "private/qqmlvaluetype_p.h"
@@ -598,14 +781,21 @@ Module {
         file: "private/qqmlvaluetype_p.h"
         name: "QQmlRectFValueType"
         accessSemantics: "value"
-        Property { name: "x"; type: "double"; read: "x"; write: "setX" }
-        Property { name: "y"; type: "double"; read: "y"; write: "setY" }
-        Property { name: "width"; type: "double"; read: "width"; write: "setWidth" }
-        Property { name: "height"; type: "double"; read: "height"; write: "setHeight" }
-        Property { name: "left"; type: "double"; isReadonly: true; read: "left" }
-        Property { name: "right"; type: "double"; isReadonly: true; read: "right" }
-        Property { name: "top"; type: "double"; isReadonly: true; read: "top" }
-        Property { name: "bottom"; type: "double"; isReadonly: true; read: "bottom" }
+        Property { name: "x"; type: "double"; read: "x"; write: "setX"; index: 0; isFinal: true }
+        Property { name: "y"; type: "double"; read: "y"; write: "setY"; index: 1; isFinal: true }
+        Property { name: "width"; type: "double"; read: "width"; write: "setWidth"; index: 2; isFinal: true }
+        Property {
+            name: "height"
+            type: "double"
+            read: "height"
+            write: "setHeight"
+            index: 3
+            isFinal: true
+        }
+        Property { name: "left"; type: "double"; read: "left"; index: 4; isReadonly: true; isFinal: true }
+        Property { name: "right"; type: "double"; read: "right"; index: 5; isReadonly: true; isFinal: true }
+        Property { name: "top"; type: "double"; read: "top"; index: 6; isReadonly: true; isFinal: true }
+        Property { name: "bottom"; type: "double"; read: "bottom"; index: 7; isReadonly: true; isFinal: true }
         Method { name: "toString"; type: "QString" }
     }
     Component {
@@ -618,14 +808,14 @@ Module {
         file: "private/qqmlvaluetype_p.h"
         name: "QQmlRectValueType"
         accessSemantics: "value"
-        Property { name: "x"; type: "int"; read: "x"; write: "setX" }
-        Property { name: "y"; type: "int"; read: "y"; write: "setY" }
-        Property { name: "width"; type: "int"; read: "width"; write: "setWidth" }
-        Property { name: "height"; type: "int"; read: "height"; write: "setHeight" }
-        Property { name: "left"; type: "int"; isReadonly: true; read: "left" }
-        Property { name: "right"; type: "int"; isReadonly: true; read: "right" }
-        Property { name: "top"; type: "int"; isReadonly: true; read: "top" }
-        Property { name: "bottom"; type: "int"; isReadonly: true; read: "bottom" }
+        Property { name: "x"; type: "int"; read: "x"; write: "setX"; index: 0; isFinal: true }
+        Property { name: "y"; type: "int"; read: "y"; write: "setY"; index: 1; isFinal: true }
+        Property { name: "width"; type: "int"; read: "width"; write: "setWidth"; index: 2; isFinal: true }
+        Property { name: "height"; type: "int"; read: "height"; write: "setHeight"; index: 3; isFinal: true }
+        Property { name: "left"; type: "int"; read: "left"; index: 4; isReadonly: true; isFinal: true }
+        Property { name: "right"; type: "int"; read: "right"; index: 5; isReadonly: true; isFinal: true }
+        Property { name: "top"; type: "int"; read: "top"; index: 6; isReadonly: true; isFinal: true }
+        Property { name: "bottom"; type: "int"; read: "bottom"; index: 7; isReadonly: true; isFinal: true }
         Method { name: "toString"; type: "QString" }
     }
     Component { file: "qqmlscriptstring.h"; name: "QQmlScriptString"; accessSemantics: "value" }
@@ -642,8 +832,15 @@ Module {
         file: "private/qqmlvaluetype_p.h"
         name: "QQmlSizeFValueType"
         accessSemantics: "value"
-        Property { name: "width"; type: "double"; read: "width"; write: "setWidth" }
-        Property { name: "height"; type: "double"; read: "height"; write: "setHeight" }
+        Property { name: "width"; type: "double"; read: "width"; write: "setWidth"; index: 0; isFinal: true }
+        Property {
+            name: "height"
+            type: "double"
+            read: "height"
+            write: "setHeight"
+            index: 1
+            isFinal: true
+        }
         Method { name: "toString"; type: "QString" }
     }
     Component {
@@ -656,29 +853,64 @@ Module {
         file: "private/qqmlvaluetype_p.h"
         name: "QQmlSizeValueType"
         accessSemantics: "value"
-        Property { name: "width"; type: "int"; read: "width"; write: "setWidth" }
-        Property { name: "height"; type: "int"; read: "height"; write: "setHeight" }
+        Property { name: "width"; type: "int"; read: "width"; write: "setWidth"; index: 0; isFinal: true }
+        Property { name: "height"; type: "int"; read: "height"; write: "setHeight"; index: 1; isFinal: true }
         Method { name: "toString"; type: "QString" }
     }
     Component {
         file: "private/qqmltimer_p.h"
         name: "QQmlTimer"
         accessSemantics: "reference"
+        parentProperty: "parent"
         prototype: "QObject"
         interfaces: ["QQmlParserStatus"]
         exports: ["QtQml/Timer 2.0", "QtQml/Timer 6.0"]
         exportMetaObjectRevisions: [512, 1536]
-        Property { name: "interval"; type: "int"; read: "interval"; write: "setInterval" }
-        Property { name: "running"; type: "bool"; read: "isRunning"; write: "setRunning" }
-        Property { name: "repeat"; type: "bool"; read: "isRepeating"; write: "setRepeating" }
+        Property {
+            name: "interval"
+            type: "int"
+            read: "interval"
+            write: "setInterval"
+            notify: "intervalChanged"
+            index: 0
+        }
+        Property {
+            name: "running"
+            type: "bool"
+            read: "isRunning"
+            write: "setRunning"
+            notify: "runningChanged"
+            index: 1
+        }
+        Property {
+            name: "repeat"
+            type: "bool"
+            read: "isRepeating"
+            write: "setRepeating"
+            notify: "repeatChanged"
+            index: 2
+        }
         Property {
             name: "triggeredOnStart"
             type: "bool"
             read: "triggeredOnStart"
             write: "setTriggeredOnStart"
+            notify: "triggeredOnStartChanged"
+            index: 3
         }
-        Property { name: "parent"; type: "QObject"; isReadonly: true; isPointer: true; read: "parent" }
+        Property {
+            name: "parent"
+            type: "QObject"
+            isPointer: true
+            read: "parent"
+            index: 4
+            isReadonly: true
+        }
         Signal { name: "triggered" }
+        Signal { name: "runningChanged" }
+        Signal { name: "intervalChanged" }
+        Signal { name: "repeatChanged" }
+        Signal { name: "triggeredOnStartChanged" }
         Method { name: "start" }
         Method { name: "stop" }
         Method { name: "restart" }
@@ -2013,6 +2245,7 @@ Module {
                 "ImEnterKeyType",
                 "ImAnchorRectangle",
                 "ImInputItemClipRectangle",
+                "ImReadOnly",
                 "ImPlatformData",
                 "ImQueryInput",
                 "ImQueryAll"
@@ -2039,6 +2272,7 @@ Module {
                 "ImEnterKeyType",
                 "ImAnchorRectangle",
                 "ImInputItemClipRectangle",
+                "ImReadOnly",
                 "ImPlatformData",
                 "ImQueryInput",
                 "ImQueryAll"
@@ -2212,6 +2446,7 @@ Module {
                 "MatchRegularExpression",
                 "MatchWildcard",
                 "MatchFixedString",
+                "MatchTypeMask",
                 "MatchCaseSensitive",
                 "MatchWrap",
                 "MatchRecursive"
@@ -2374,38 +2609,43 @@ Module {
         Property {
             name: "application"
             type: "QQmlApplication"
-            isReadonly: true
             isPointer: true
             read: "application"
+            index: 0
+            isReadonly: true
         }
         Property {
             name: "platform"
             type: "QQmlPlatform"
-            isReadonly: true
             isPointer: true
             read: "platform"
+            index: 1
+            isReadonly: true
         }
         Property {
             name: "inputMethod"
             type: "QObject"
-            isReadonly: true
             isPointer: true
             read: "inputMethod"
+            index: 2
+            isReadonly: true
         }
         Property {
             name: "styleHints"
             type: "QObject"
-            isReadonly: true
             isPointer: true
             read: "styleHints"
+            index: 3
+            isReadonly: true
         }
-        Property { name: "callLater"; type: "QJSValue"; isReadonly: true; read: "callLater" }
+        Property { name: "callLater"; type: "QJSValue"; read: "callLater"; index: 4; isReadonly: true }
         Property {
             name: "uiLanguage"
-            bindable: "uiLanguageBindable"
             type: "QString"
+            bindable: "uiLanguageBindable"
             read: "uiLanguage"
             write: "setUiLanguage"
+            index: 5
         }
         Method {
             name: "include"
@@ -2715,9 +2955,20 @@ Module {
             Parameter { name: "name"; type: "QString" }
         }
         Method {
+            name: "url"
+            type: "QUrl"
+            Parameter { name: "url"; type: "QUrl" }
+        }
+        Method {
             name: "resolvedUrl"
             type: "QUrl"
             Parameter { name: "url"; type: "QUrl" }
+        }
+        Method {
+            name: "resolvedUrl"
+            type: "QUrl"
+            Parameter { name: "url"; type: "QUrl" }
+            Parameter { name: "context"; type: "QObject"; isPointer: true }
         }
         Method {
             name: "openUrlExternally"
@@ -2752,39 +3003,45 @@ Module {
         }
         Method {
             name: "createQmlObject"
-            type: "QObject*"
+            type: "QObject"
+            isPointer: true
             Parameter { name: "qml"; type: "QString" }
             Parameter { name: "parent"; type: "QObject"; isPointer: true }
             Parameter { name: "url"; type: "QUrl" }
         }
         Method {
             name: "createQmlObject"
-            type: "QObject*"
+            type: "QObject"
+            isPointer: true
             Parameter { name: "qml"; type: "QString" }
             Parameter { name: "parent"; type: "QObject"; isPointer: true }
         }
         Method {
             name: "createComponent"
-            type: "QQmlComponent*"
+            type: "QQmlComponent"
+            isPointer: true
             Parameter { name: "url"; type: "QUrl" }
             Parameter { name: "parent"; type: "QObject"; isPointer: true }
         }
         Method {
             name: "createComponent"
-            type: "QQmlComponent*"
+            type: "QQmlComponent"
+            isPointer: true
             Parameter { name: "url"; type: "QUrl" }
             Parameter { name: "mode"; type: "QQmlComponent::CompilationMode" }
             Parameter { name: "parent"; type: "QObject"; isPointer: true }
         }
         Method {
             name: "createComponent"
-            type: "QQmlComponent*"
+            type: "QQmlComponent"
+            isPointer: true
             Parameter { name: "url"; type: "QUrl" }
             Parameter { name: "mode"; type: "QQmlComponent::CompilationMode" }
         }
         Method {
             name: "createComponent"
-            type: "QQmlComponent*"
+            type: "QQmlComponent"
+            isPointer: true
             Parameter { name: "url"; type: "QUrl" }
         }
         Method {

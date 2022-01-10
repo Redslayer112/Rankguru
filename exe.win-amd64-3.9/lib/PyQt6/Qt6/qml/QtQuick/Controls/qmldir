@@ -1,4 +1,5 @@
 module QtQuick.Controls
+linktarget Qt6::qtquickcontrols2plugin
 plugin qtquickcontrols2plugin
 classname QtQuickControls2Plugin
 designersupported
@@ -11,4 +12,5 @@ optional import QtQuick.Controls.Imagine auto
 optional import QtQuick.Controls.Universal auto
 optional import QtQuick.Controls.Windows auto
 optional import QtQuick.Controls.macOS auto
+prefer :/qt-project.org/imports/QtQuick/Controls/
 

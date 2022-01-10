@@ -129,6 +129,9 @@ public:
         IsPointer,
         RelocatableType,
         IsQmlList,
+%If (Qt_6_2_0 -)
+        IsConst,
+%End
     };
 
     typedef QFlags<QMetaType::TypeFlag> TypeFlags;

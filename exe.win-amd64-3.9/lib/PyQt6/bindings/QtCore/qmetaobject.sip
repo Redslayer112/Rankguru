@@ -143,6 +143,9 @@ public:
     QMetaType parameterMetaType(int index) const;
     QByteArray parameterTypeName(int index) const;
     int relativeMethodIndex() const;
+%If (Qt_6_2_0 -)
+    bool isConst() const;
+%End
 };
 
 class QMetaEnum

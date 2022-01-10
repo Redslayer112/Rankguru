@@ -496,4 +496,150 @@ MetaInfo {
             ExtraFile { source: "./source/effect_default_shader.frag" }
         }
     }
+    Type {
+        name: "QtQuick3D.Repeater3D"
+        icon: "images/repeater3d16.png"
+
+        Hints {
+            visibleInNavigator: true
+            canBeDroppedInNavigator: true
+            canBeDroppedInFormEditor: false
+            canBeDroppedInView3D: true
+        }
+
+        ItemLibraryEntry {
+            name: "Repeater3D"
+            category: "Qt Quick 3D"
+            libraryIcon: "images/repeater3d.png"
+            version: "6.0"
+            requiredImport: "QtQuick3D"
+        }
+    }
+    Type {
+        name: "QtQuick3D.Loader3D"
+        icon: "images/loader3d16.png"
+
+        Hints {
+            visibleInNavigator: true
+            canBeDroppedInNavigator: true
+            canBeDroppedInFormEditor: false
+            canBeDroppedInView3D: true
+        }
+
+        ItemLibraryEntry {
+            name: "Loader3D"
+            category: "Qt Quick 3D"
+            libraryIcon: "images/loader3d.png"
+            version: "6.0"
+            requiredImport: "QtQuick3D"
+        }
+    }
+    Type {
+        name: "QtQuick3D.Skeleton"
+        icon: "images/skeleton16.png"
+
+        Hints {
+            visibleInNavigator: true
+            canBeDroppedInNavigator: true
+            canBeDroppedInFormEditor: false
+        }
+
+        ItemLibraryEntry {
+            name: "Skeleton"
+            category: "Qt Quick 3D"
+            libraryIcon: "images/skeleton.png"
+            version: "6.0"
+            requiredImport: "QtQuick3D"
+        }
+    }
+    Type {
+        name: "QtQuick3D.MorphTarget"
+        icon: "images/morphtarget16.png"
+
+        Hints {
+            visibleInNavigator: true
+            canBeDroppedInNavigator: true
+            canBeDroppedInFormEditor: false
+        }
+
+        ItemLibraryEntry {
+            name: "Morph Target"
+            category: "Qt Quick 3D"
+            libraryIcon: "images/morphtarget.png"
+            version: "6.0"
+            requiredImport: "QtQuick3D"
+        }
+    }
+    Type {
+        name: "QtQuick3D.InstanceListEntry"
+        icon: "images/instancelistentry16.png"
+
+        Hints {
+            visibleInNavigator: true
+            canBeDroppedInNavigator: true
+            canBeDroppedInFormEditor: false
+        }
+
+        ItemLibraryEntry {
+            name: "Instance List Entry"
+            category: "Qt Quick 3D"
+            libraryIcon: "images/instancelistentry.png"
+            version: "6.2"
+            requiredImport: "QtQuick3D"
+        }
+    }
+    Type {
+        name: "QtQuick3D.InstanceList"
+        icon: "images/instancelist16.png"
+
+        Hints {
+            visibleInNavigator: true
+            canBeDroppedInNavigator: true
+            canBeDroppedInFormEditor: false
+        }
+
+        ItemLibraryEntry {
+            name: "Instance List"
+            category: "Qt Quick 3D"
+            libraryIcon: "images/instancelist.png"
+            version: "6.2"
+            requiredImport: "QtQuick3D"
+        }
+    }
+    Type {
+        name: "QtQuick3D.FileInstancing"
+        icon: "images/fileinstancing16.png"
+
+        Hints {
+            visibleInNavigator: true
+            canBeDroppedInNavigator: true
+            canBeDroppedInFormEditor: false
+        }
+
+        ItemLibraryEntry {
+            name: "File Instancing"
+            category: "Qt Quick 3D"
+            libraryIcon: "images/fileinstancing.png"
+            version: "6.2"
+            requiredImport: "QtQuick3D"
+        }
+    }
+    Type {
+        name: "QtQuick3D.Joint"
+        icon: "images/joint16.png"
+
+        Hints {
+            visibleInNavigator: true
+            canBeDroppedInNavigator: true
+            canBeDroppedInFormEditor: false
+        }
+
+        ItemLibraryEntry {
+            name: "Joint"
+            category: "Qt Quick 3D"
+            libraryIcon: "images/joint.png"
+            version: "6.0"
+            requiredImport: "QtQuick3D"
+        }
+    }
 }

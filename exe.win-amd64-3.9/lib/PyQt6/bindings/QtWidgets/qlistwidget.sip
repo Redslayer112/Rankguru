@@ -27,7 +27,7 @@ class QListWidgetItem /Supertype=PyQt6.sip.wrapper/
 %End
 
 public:
-    enum ItemType
+    enum ItemType /BaseType=IntEnum/
     {
         Type,
         UserType,

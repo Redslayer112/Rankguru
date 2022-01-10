@@ -56,7 +56,13 @@ T.PageIndicator {
         radius: width / 2
         color: control.enabled ? control.Material.foreground : control.Material.hintTextColor
 
-        opacity: index === currentIndex ? 0.95 : pressed ? 0.7 : 0.45
+        // qmllint disable unqualified
+        // We can't make "pressed" a required property, as QQuickPageIndicator doesn't create
+        // the delegates, and so it can't set it as an initial property.
+        opacity: index === control.currentIndex ? 0.95 : pressed ? 0.7 : 0.45
+
+        required property int index
+
         Behavior on opacity { OpacityAnimator { duration: 100 } }
     }
 

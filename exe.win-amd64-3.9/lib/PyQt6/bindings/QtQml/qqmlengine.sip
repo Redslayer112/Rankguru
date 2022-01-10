@@ -121,6 +121,9 @@ public:
     void addUrlInterceptor(QQmlAbstractUrlInterceptor *urlInterceptor);
     void removeUrlInterceptor(QQmlAbstractUrlInterceptor *urlInterceptor);
     QUrl interceptUrl(const QUrl &url, QQmlAbstractUrlInterceptor::DataType type) const;
+%If (Qt_6_2_0 -)
+    QList<QQmlAbstractUrlInterceptor *> urlInterceptors() const;
+%End
 };
 
 class QQmlImageProviderBase : QObject

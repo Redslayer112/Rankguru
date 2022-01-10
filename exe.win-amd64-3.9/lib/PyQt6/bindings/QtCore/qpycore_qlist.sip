@@ -1133,7 +1133,7 @@ template<qreal, _TYPE_>
         return 0;
     }
 
-    QList<float> *qv = new QList<float>;
+    QList<float> *ql = new QList<float>;
 
     for (Py_ssize_t i = 0; ; ++i)
     {
@@ -1144,7 +1144,7 @@ template<qreal, _TYPE_>
         {
             if (PyErr_Occurred())
             {
-                delete qv;
+                delete ql;
                 Py_DECREF(iter);
                 *sipIsErr = 1;
 
@@ -1160,25 +1160,25 @@ template<qreal, _TYPE_>
         if (PyErr_Occurred())
         {
             PyErr_Format(PyExc_TypeError,
-                    "index %zd has type '%s' but 'int' is expected", i,
+                    "index %zd has type '%s' but 'float' is expected", i,
                     sipPyTypeName(Py_TYPE(itm)));
 
             Py_DECREF(itm);
-            delete qv;
+            delete ql;
             Py_DECREF(iter);
             *sipIsErr = 1;
 
             return 0;
         }
 
-        qv->append(val);
+        ql->append(val);
 
         Py_DECREF(itm);
     }
 
     Py_DECREF(iter);
 
-    *sipCppPtr = qv;
+    *sipCppPtr = ql;
 
     return sipGetState(sipTransferObj);
 %End

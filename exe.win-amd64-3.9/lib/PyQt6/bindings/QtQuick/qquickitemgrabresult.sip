@@ -30,6 +30,9 @@ public:
     QImage image() const;
     QUrl url() const;
     bool saveToFile(const QString &fileName) const;
+%If (Qt_6_2_0 -)
+    bool saveToFile(const QUrl &fileName) const;
+%End
 
 protected:
     virtual bool event(QEvent *);

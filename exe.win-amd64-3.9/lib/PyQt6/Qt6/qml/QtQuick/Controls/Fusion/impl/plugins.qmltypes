@@ -19,8 +19,8 @@ Module {
             "QtQuick.Controls.Fusion.impl/BusyIndicatorImpl 6.0"
         ]
         exportMetaObjectRevisions: [515, 516, 519, 523, 1536]
-        Property { name: "color"; type: "QColor"; read: "color"; write: "setColor" }
-        Property { name: "running"; type: "bool"; read: "isRunning"; write: "setRunning" }
+        Property { name: "color"; type: "QColor"; read: "color"; write: "setColor"; index: 0; isFinal: true }
+        Property { name: "running"; type: "bool"; read: "isRunning"; write: "setRunning"; index: 1 }
     }
     Component {
         file: "qquickfusiondial_p.h"
@@ -35,7 +35,14 @@ Module {
             "QtQuick.Controls.Fusion.impl/DialImpl 6.0"
         ]
         exportMetaObjectRevisions: [515, 516, 519, 523, 1536]
-        Property { name: "highlight"; type: "bool"; read: "highlight"; write: "setHighlight" }
+        Property {
+            name: "highlight"
+            type: "bool"
+            read: "highlight"
+            write: "setHighlight"
+            index: 0
+            isFinal: true
+        }
     }
     Component {
         file: "qquickfusionknob_p.h"

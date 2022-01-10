@@ -123,7 +123,7 @@ namespace Qt
 
     typedef QFlags<Qt::Orientation> Orientations;
 
-    enum FocusPolicy
+    enum FocusPolicy /BaseType=Flag/
     {
         NoFocus,
         TabFocus,
@@ -1107,6 +1107,9 @@ namespace Qt
         ImEnterKeyType,
         ImAnchorRectangle,
         ImInputItemClipRectangle,
+%If (Qt_6_2_0 -)
+        ImReadOnly,
+%End
     };
 
     typedef QFlags<Qt::InputMethodQuery> InputMethodQueries;

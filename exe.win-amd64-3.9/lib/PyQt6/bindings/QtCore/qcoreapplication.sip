@@ -72,7 +72,6 @@ public:
     static int exec() /PostHook=__pyQtPostEventLoopHook__,PreHook=__pyQtPreEventLoopHook__,ReleaseGIL/;
     static void processEvents(QEventLoop::ProcessEventsFlags flags = QEventLoop::AllEvents) /ReleaseGIL/;
     static void processEvents(QEventLoop::ProcessEventsFlags flags, int maxtime) /ReleaseGIL/;
-    static void exit(int returnCode = 0);
     static bool sendEvent(QObject *receiver, QEvent *event) /ReleaseGIL/;
     static void postEvent(QObject *receiver, QEvent *event /Transfer/, int priority = Qt::NormalEventPriority);
     static void sendPostedEvents(QObject *receiver = 0, int eventType = 0) /ReleaseGIL/;
@@ -94,6 +93,14 @@ public:
 
 public slots:
     static void quit();
+%If (Qt_6_1_0 -)
+    static void exit(int returnCode = 0);
+%End
+
+public:
+%If (- Qt_6_1_0)
+    static void exit(int returnCode = 0);
+%End
 
 signals:
     void aboutToQuit();
@@ -252,6 +259,7 @@ void pyqtRestoreInputHook();
 
 %ModuleCode
 #include <QCoreApplication>
+#include <QEventLoop>
 #include <QThread>
 
 #if defined(Q_OS_WIN)
@@ -271,24 +279,25 @@ static int qtcore_input_hook()
 
     if (app && app->thread() == QThread::currentThread())
     {
+        QEventLoop loop;
 #if defined(Q_OS_WIN)
         QTimer timer;
-        QObject::connect(&timer, SIGNAL(timeout()), app, SLOT(quit()));
+        QObject::connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
 
         while (!_kbhit())
         {
             // The delay is based on feedback from users.
             timer.start(35);
-            QCoreApplication::exec();
+            loop.exec();
             timer.stop();
         }
 
-        QObject::disconnect(&timer, SIGNAL(timeout()), app, SLOT(quit()));
+        QObject::disconnect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
 #else
         QSocketNotifier notifier(0, QSocketNotifier::Read, 0);
-        QObject::connect(&notifier, SIGNAL(activated(int)), app, SLOT(quit()));
-        QCoreApplication::exec();
-        QObject::disconnect(&notifier, SIGNAL(activated(int)), app, SLOT(quit()));
+        QObject::connect(&notifier, SIGNAL(activated(int)), &loop, SLOT(quit()));
+        loop.exec();
+        QObject::disconnect(&notifier, SIGNAL(activated(int)), &loop, SLOT(quit()));
 #endif
     }
 

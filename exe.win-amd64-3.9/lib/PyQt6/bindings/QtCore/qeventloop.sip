@@ -69,3 +69,10 @@ public:
 private:
     QEventLoopLocker(const QEventLoopLocker &);
 };
+
+%If (Qt_6_2_0 -)
+QFlags<QEventLoop::ProcessEventsFlag> operator&(QEventLoop::ProcessEventsFlag f1, QFlags<QEventLoop::ProcessEventsFlag> f2);
+%End
+%If (Qt_6_2_0 -)
+QFlags<QEventLoop::ProcessEventsFlag> operator&(QEventLoop::ProcessEventsFlag f1, QEventLoop::ProcessEventsFlag f2);
+%End

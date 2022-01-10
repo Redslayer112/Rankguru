@@ -11,6 +11,7 @@ Module {
         name: "QQuickMaterialBusyIndicator"
         accessSemantics: "reference"
         defaultProperty: "data"
+        parentProperty: "parent"
         prototype: "QQuickItem"
         exports: [
             "QtQuick.Controls.Material.impl/BusyIndicatorImpl 2.0",
@@ -21,14 +22,22 @@ Module {
             "QtQuick.Controls.Material.impl/BusyIndicatorImpl 6.0"
         ]
         exportMetaObjectRevisions: [512, 513, 516, 519, 523, 1536]
-        Property { name: "color"; type: "QColor"; read: "color"; write: "setColor" }
-        Property { name: "running"; type: "bool"; read: "isRunning"; write: "setRunning" }
+        Property { name: "color"; type: "QColor"; read: "color"; write: "setColor"; index: 0; isFinal: true }
+        Property {
+            name: "running"
+            type: "bool"
+            read: "isRunning"
+            write: "setRunning"
+            index: 1
+            isFinal: true
+        }
     }
     Component {
         file: "qquickmaterialprogressbar_p.h"
         name: "QQuickMaterialProgressBar"
         accessSemantics: "reference"
         defaultProperty: "data"
+        parentProperty: "parent"
         prototype: "QQuickItem"
         exports: [
             "QtQuick.Controls.Material.impl/ProgressBarImpl 2.0",
@@ -39,13 +48,22 @@ Module {
             "QtQuick.Controls.Material.impl/ProgressBarImpl 6.0"
         ]
         exportMetaObjectRevisions: [512, 513, 516, 519, 523, 1536]
-        Property { name: "color"; type: "QColor"; read: "color"; write: "setColor" }
-        Property { name: "progress"; type: "double"; read: "progress"; write: "setProgress" }
+        Property { name: "color"; type: "QColor"; read: "color"; write: "setColor"; index: 0; isFinal: true }
+        Property {
+            name: "progress"
+            type: "double"
+            read: "progress"
+            write: "setProgress"
+            index: 1
+            isFinal: true
+        }
         Property {
             name: "indeterminate"
             type: "bool"
             read: "isIndeterminate"
             write: "setIndeterminate"
+            index: 2
+            isFinal: true
         }
     }
     Component {
@@ -53,6 +71,7 @@ Module {
         name: "QQuickMaterialRipple"
         accessSemantics: "reference"
         defaultProperty: "data"
+        parentProperty: "parent"
         prototype: "QQuickItem"
         exports: [
             "QtQuick.Controls.Material.impl/Ripple 2.0",
@@ -67,11 +86,47 @@ Module {
             name: "Trigger"
             values: ["Press", "Release"]
         }
-        Property { name: "color"; type: "QColor"; read: "color"; write: "setColor" }
-        Property { name: "clipRadius"; type: "double"; read: "clipRadius"; write: "setClipRadius" }
-        Property { name: "pressed"; type: "bool"; read: "isPressed"; write: "setPressed" }
-        Property { name: "active"; type: "bool"; read: "isActive"; write: "setActive" }
-        Property { name: "anchor"; type: "QQuickItem"; isPointer: true; read: "anchor"; write: "setAnchor" }
-        Property { name: "trigger"; type: "Trigger"; read: "trigger"; write: "setTrigger" }
+        Property { name: "color"; type: "QColor"; read: "color"; write: "setColor"; index: 0; isFinal: true }
+        Property {
+            name: "clipRadius"
+            type: "double"
+            read: "clipRadius"
+            write: "setClipRadius"
+            index: 1
+            isFinal: true
+        }
+        Property {
+            name: "pressed"
+            type: "bool"
+            read: "isPressed"
+            write: "setPressed"
+            index: 2
+            isFinal: true
+        }
+        Property {
+            name: "active"
+            type: "bool"
+            read: "isActive"
+            write: "setActive"
+            index: 3
+            isFinal: true
+        }
+        Property {
+            name: "anchor"
+            type: "QQuickItem"
+            isPointer: true
+            read: "anchor"
+            write: "setAnchor"
+            index: 4
+            isFinal: true
+        }
+        Property {
+            name: "trigger"
+            type: "Trigger"
+            read: "trigger"
+            write: "setTrigger"
+            index: 5
+            isFinal: true
+        }
     }
 }

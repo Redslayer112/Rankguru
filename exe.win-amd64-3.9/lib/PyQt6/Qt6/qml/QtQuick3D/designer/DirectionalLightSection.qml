@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2019 The Qt Company Ltd.
+** Copyright (C) 2021 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick 3D.
@@ -28,70 +28,9 @@
 ****************************************************************************/
 
 import QtQuick 2.15
+import QtQuick.Layouts 1.15
 import HelperWidgets 2.0
-import QtQuick.Layouts 1.12
 
 Column {
     width: parent.width
-
-    Section {
-        caption: qsTr("DirectionalLight")
-        width: parent.width
-
-        SectionLayout {
-            Label {
-                text: qsTr("Scope")
-                tooltip: qsTr("Sets the scope of the light. Only the node and its children are affected by this light.")
-            }
-            SecondColumnLayout {
-                IdComboBox {
-                    typeFilter: "QtQuick3D.Node"
-                    Layout.fillWidth: true
-                    backendValue: backendValues.scope
-                }
-            }
-            Label {
-                text: qsTr("Brightness")
-                tooltip: qsTr("Sets the strength of the light.")
-            }
-            SecondColumnLayout {
-                SpinBox {
-                    maximumValue: 9999999
-                    minimumValue: -9999999
-                    realDragRange: 5000
-                    decimals: 0
-                    backendValue: backendValues.brightness
-                    Layout.fillWidth: true
-                }
-            }
-        }
-    }
-
-    Section {
-        caption: qsTr("Color")
-        width: parent.width
-
-        ColorEditor {
-            caption: qsTr("Color")
-            backendValue: backendValues.color
-            supportGradient: false
-            Layout.fillWidth: true
-        }
-    }
-
-    Section {
-        caption: qsTr("Ambient Color")
-        width: parent.width
-        ColorEditor {
-            caption: qsTr("Ambient Color")
-            backendValue: backendValues.ambientColor
-            supportGradient: false
-            Layout.fillWidth: true
-        }
-    }
-
-    ShadowSection {
-        width: parent.width
-    }
-
 }

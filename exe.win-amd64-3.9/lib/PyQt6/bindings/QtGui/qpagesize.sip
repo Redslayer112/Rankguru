@@ -174,7 +174,12 @@ public:
     };
 
     QPageSize();
+%If (Qt_6_2_0 -)
+    QPageSize(QPageSize::PageSizeId pageSizeId);
+%End
+%If (- Qt_6_2_0)
     explicit QPageSize(QPageSize::PageSizeId pageSizeId);
+%End
     QPageSize(const QSize &pointSize, const QString &name = QString(), QPageSize::SizeMatchPolicy matchPolicy = QPageSize::FuzzyMatch);
     QPageSize(const QSizeF &size, QPageSize::Unit units, const QString &name = QString(), QPageSize::SizeMatchPolicy matchPolicy = QPageSize::FuzzyMatch);
     QPageSize(const QPageSize &other);

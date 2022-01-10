@@ -77,6 +77,9 @@ class QGraphicsSceneEvent : QEvent /NoDefaultCtors/
 public:
     virtual ~QGraphicsSceneEvent();
     QWidget *widget() const;
+%If (Qt_6_2_0 -)
+    quint64 timestamp() const;
+%End
 
 private:
     QGraphicsSceneEvent(const QGraphicsSceneEvent &);
@@ -121,6 +124,15 @@ public:
     Qt::KeyboardModifiers modifiers() const;
     int delta() const;
     Qt::Orientation orientation() const;
+%If (Qt_6_2_0 -)
+    Qt::ScrollPhase phase() const;
+%End
+%If (Qt_6_2_0 -)
+    QPoint pixelDelta() const;
+%End
+%If (Qt_6_2_0 -)
+    bool isInverted() const;
+%End
 };
 
 class QGraphicsSceneContextMenuEvent : QGraphicsSceneEvent /NoDefaultCtors/

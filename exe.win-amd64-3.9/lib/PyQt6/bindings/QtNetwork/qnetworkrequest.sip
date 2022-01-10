@@ -143,4 +143,10 @@ public:
 
     int transferTimeout() const;
     void setTransferTimeout(int timeout = QNetworkRequest::DefaultTransferTimeoutConstant);
+%If (Qt_6_2_0 -)
+    qint64 decompressedSafetyCheckThreshold() const;
+%End
+%If (Qt_6_2_0 -)
+    void setDecompressedSafetyCheckThreshold(qint64 threshold);
+%End
 };

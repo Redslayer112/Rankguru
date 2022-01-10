@@ -144,6 +144,9 @@ namespace QSsl
         DiffieHellman,
         EllipticCurve,
         Dtls,
+%If (Qt_6_2_0 -)
+        DtlsCookie,
+%End
     };
 
 %End

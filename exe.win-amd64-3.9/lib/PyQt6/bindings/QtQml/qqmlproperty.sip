@@ -61,6 +61,9 @@ public:
     bool isValid() const;
     bool isProperty() const;
     bool isSignalProperty() const;
+%If (Qt_6_2_0 -)
+    bool isBindable() const;
+%End
     int propertyType() const;
     QQmlProperty::PropertyTypeCategory propertyTypeCategory() const;
     const char *propertyTypeName() const;

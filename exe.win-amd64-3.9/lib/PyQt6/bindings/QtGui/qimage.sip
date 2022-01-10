@@ -129,6 +129,24 @@ public:
         Format_RGBA64_Premultiplied,
         Format_Grayscale16,
         Format_BGR888,
+%If (Qt_6_2_0 -)
+        Format_RGBX16FPx4,
+%End
+%If (Qt_6_2_0 -)
+        Format_RGBA16FPx4,
+%End
+%If (Qt_6_2_0 -)
+        Format_RGBA16FPx4_Premultiplied,
+%End
+%If (Qt_6_2_0 -)
+        Format_RGBX32FPx4,
+%End
+%If (Qt_6_2_0 -)
+        Format_RGBA32FPx4,
+%End
+%If (Qt_6_2_0 -)
+        Format_RGBA32FPx4_Premultiplied,
+%End
     };
 
     QImage();
@@ -284,6 +302,9 @@ public:
     QImage convertedToColorSpace(const QColorSpace &) const;
     void convertToColorSpace(const QColorSpace &);
     void applyColorTransform(const QColorTransform &transform);
+%If (Qt_6_2_0 -)
+    QSizeF deviceIndependentSize() const;
+%End
 };
 
 QDataStream &operator<<(QDataStream &, const QImage &) /ReleaseGIL/;

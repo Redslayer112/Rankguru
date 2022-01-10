@@ -7,7 +7,7 @@ import QtQuick.tooling 1.2
 
 Module {
     Component {
-        file: "private/qquickage_p.h"
+        file: "qquickage_p.h"
         name: "QQuickAgeAffector"
         accessSemantics: "reference"
         prototype: "QQuickParticleAffector"
@@ -20,12 +20,21 @@ Module {
             "QtQuick.Particles/Age 6.0"
         ]
         exportMetaObjectRevisions: [512, 513, 516, 519, 523, 1536]
-        Property { name: "lifeLeft"; type: "int"; read: "lifeLeft"; write: "setLifeLeft" }
+        Property {
+            name: "lifeLeft"
+            type: "int"
+            read: "lifeLeft"
+            write: "setLifeLeft"
+            notify: "lifeLeftChanged"
+            index: 0
+        }
         Property {
             name: "advancePosition"
             type: "bool"
             read: "advancePosition"
             write: "setAdvancePosition"
+            notify: "advancePositionChanged"
+            index: 1
         }
         Signal {
             name: "lifeLeftChanged"
@@ -45,7 +54,7 @@ Module {
         }
     }
     Component {
-        file: "private/qquickangledirection_p.h"
+        file: "qquickangledirection_p.h"
         name: "QQuickAngleDirection"
         accessSemantics: "reference"
         prototype: "QQuickDirection"
@@ -54,19 +63,37 @@ Module {
             "QtQuick.Particles/AngleDirection 6.0"
         ]
         exportMetaObjectRevisions: [512, 1536]
-        Property { name: "angle"; type: "double"; read: "angle"; write: "setAngle" }
-        Property { name: "magnitude"; type: "double"; read: "magnitude"; write: "setMagnitude" }
+        Property {
+            name: "angle"
+            type: "double"
+            read: "angle"
+            write: "setAngle"
+            notify: "angleChanged"
+            index: 0
+        }
+        Property {
+            name: "magnitude"
+            type: "double"
+            read: "magnitude"
+            write: "setMagnitude"
+            notify: "magnitudeChanged"
+            index: 1
+        }
         Property {
             name: "angleVariation"
             type: "double"
             read: "angleVariation"
             write: "setAngleVariation"
+            notify: "angleVariationChanged"
+            index: 2
         }
         Property {
             name: "magnitudeVariation"
             type: "double"
             read: "magnitudeVariation"
             write: "setMagnitudeVariation"
+            notify: "magnitudeVariationChanged"
+            index: 3
         }
         Signal {
             name: "angleChanged"
@@ -102,7 +129,7 @@ Module {
         }
     }
     Component {
-        file: "private/qquickpointattractor_p.h"
+        file: "qquickpointattractor_p.h"
         name: "QQuickAttractorAffector"
         accessSemantics: "reference"
         prototype: "QQuickParticleAffector"
@@ -129,20 +156,45 @@ Module {
             name: "AffectableParameters"
             values: ["Position", "Velocity", "Acceleration"]
         }
-        Property { name: "strength"; type: "double"; read: "strength"; write: "setStrength" }
-        Property { name: "pointX"; type: "double"; read: "pointX"; write: "setPointX" }
-        Property { name: "pointY"; type: "double"; read: "pointY"; write: "setPointY" }
+        Property {
+            name: "strength"
+            type: "double"
+            read: "strength"
+            write: "setStrength"
+            notify: "strengthChanged"
+            index: 0
+        }
+        Property {
+            name: "pointX"
+            type: "double"
+            read: "pointX"
+            write: "setPointX"
+            notify: "pointXChanged"
+            index: 1
+        }
+        Property {
+            name: "pointY"
+            type: "double"
+            read: "pointY"
+            write: "setPointY"
+            notify: "pointYChanged"
+            index: 2
+        }
         Property {
             name: "affectedParameter"
             type: "AffectableParameters"
             read: "affectedParameter"
             write: "setAffectedParameter"
+            notify: "affectedParameterChanged"
+            index: 3
         }
         Property {
             name: "proportionalToDistance"
             type: "Proportion"
             read: "proportionalToDistance"
             write: "setProportionalToDistance"
+            notify: "proportionalToDistanceChanged"
+            index: 4
         }
         Signal {
             name: "strengthChanged"
@@ -186,7 +238,7 @@ Module {
         }
     }
     Component {
-        file: "private/qquickcumulativedirection_p.h"
+        file: "qquickcumulativedirection_p.h"
         name: "QQuickCumulativeDirection"
         accessSemantics: "reference"
         defaultProperty: "directions"
@@ -200,12 +252,13 @@ Module {
             name: "directions"
             type: "QQuickDirection"
             isList: true
-            isReadonly: true
             read: "directions"
+            index: 0
+            isReadonly: true
         }
     }
     Component {
-        file: "private/qquickcustomaffector_p.h"
+        file: "qquickcustomaffector_p.h"
         name: "QQuickCustomAffector"
         accessSemantics: "reference"
         prototype: "QQuickParticleAffector"
@@ -218,13 +271,22 @@ Module {
             "QtQuick.Particles/Affector 6.0"
         ]
         exportMetaObjectRevisions: [512, 513, 516, 519, 523, 1536]
-        Property { name: "relative"; type: "bool"; read: "relative"; write: "setRelative" }
+        Property {
+            name: "relative"
+            type: "bool"
+            read: "relative"
+            write: "setRelative"
+            notify: "relativeChanged"
+            index: 0
+        }
         Property {
             name: "position"
             type: "QQuickDirection"
             isPointer: true
             read: "position"
             write: "setPosition"
+            notify: "positionChanged"
+            index: 1
         }
         Property {
             name: "velocity"
@@ -232,6 +294,8 @@ Module {
             isPointer: true
             read: "velocity"
             write: "setVelocity"
+            notify: "velocityChanged"
+            index: 2
         }
         Property {
             name: "acceleration"
@@ -239,6 +303,8 @@ Module {
             isPointer: true
             read: "acceleration"
             write: "setAcceleration"
+            notify: "accelerationChanged"
+            index: 3
         }
         Signal {
             name: "affectParticles"
@@ -279,7 +345,7 @@ Module {
         }
     }
     Component {
-        file: "private/qquickdirection_p.h"
+        file: "qquickdirection_p.h"
         name: "QQuickDirection"
         accessSemantics: "reference"
         prototype: "QObject"
@@ -291,7 +357,7 @@ Module {
         exportMetaObjectRevisions: [512, 1536]
     }
     Component {
-        file: "private/qquickellipseextruder_p.h"
+        file: "qquickellipseextruder_p.h"
         name: "QQuickEllipseExtruder"
         accessSemantics: "reference"
         prototype: "QQuickParticleExtruder"
@@ -300,7 +366,14 @@ Module {
             "QtQuick.Particles/EllipseShape 6.0"
         ]
         exportMetaObjectRevisions: [512, 1536]
-        Property { name: "fill"; type: "bool"; read: "fill"; write: "setFill" }
+        Property {
+            name: "fill"
+            type: "bool"
+            read: "fill"
+            write: "setFill"
+            notify: "fillChanged"
+            index: 0
+        }
         Signal {
             name: "fillChanged"
             Parameter { name: "arg"; type: "bool" }
@@ -311,7 +384,7 @@ Module {
         }
     }
     Component {
-        file: "private/qquickfriction_p.h"
+        file: "qquickfriction_p.h"
         name: "QQuickFrictionAffector"
         accessSemantics: "reference"
         prototype: "QQuickParticleAffector"
@@ -324,8 +397,22 @@ Module {
             "QtQuick.Particles/Friction 6.0"
         ]
         exportMetaObjectRevisions: [512, 513, 516, 519, 523, 1536]
-        Property { name: "factor"; type: "double"; read: "factor"; write: "setFactor" }
-        Property { name: "threshold"; type: "double"; read: "threshold"; write: "setThreshold" }
+        Property {
+            name: "factor"
+            type: "double"
+            read: "factor"
+            write: "setFactor"
+            notify: "factorChanged"
+            index: 0
+        }
+        Property {
+            name: "threshold"
+            type: "double"
+            read: "threshold"
+            write: "setThreshold"
+            notify: "thresholdChanged"
+            index: 1
+        }
         Signal {
             name: "factorChanged"
             Parameter { name: "arg"; type: "double" }
@@ -344,7 +431,7 @@ Module {
         }
     }
     Component {
-        file: "private/qquickgravity_p.h"
+        file: "qquickgravity_p.h"
         name: "QQuickGravityAffector"
         accessSemantics: "reference"
         prototype: "QQuickParticleAffector"
@@ -357,9 +444,30 @@ Module {
             "QtQuick.Particles/Gravity 6.0"
         ]
         exportMetaObjectRevisions: [512, 513, 516, 519, 523, 1536]
-        Property { name: "magnitude"; type: "double"; read: "magnitude"; write: "setMagnitude" }
-        Property { name: "acceleration"; type: "double"; read: "magnitude"; write: "setAcceleration" }
-        Property { name: "angle"; type: "double"; read: "angle"; write: "setAngle" }
+        Property {
+            name: "magnitude"
+            type: "double"
+            read: "magnitude"
+            write: "setMagnitude"
+            notify: "magnitudeChanged"
+            index: 0
+        }
+        Property {
+            name: "acceleration"
+            type: "double"
+            read: "magnitude"
+            write: "setAcceleration"
+            notify: "magnitudeChanged"
+            index: 1
+        }
+        Property {
+            name: "angle"
+            type: "double"
+            read: "angle"
+            write: "setAngle"
+            notify: "angleChanged"
+            index: 2
+        }
         Signal {
             name: "magnitudeChanged"
             Parameter { name: "arg"; type: "double" }
@@ -382,7 +490,7 @@ Module {
         }
     }
     Component {
-        file: "private/qquickgroupgoal_p.h"
+        file: "qquickgroupgoal_p.h"
         name: "QQuickGroupGoalAffector"
         accessSemantics: "reference"
         prototype: "QQuickParticleAffector"
@@ -395,8 +503,22 @@ Module {
             "QtQuick.Particles/GroupGoal 6.0"
         ]
         exportMetaObjectRevisions: [512, 513, 516, 519, 523, 1536]
-        Property { name: "goalState"; type: "QString"; read: "goalState"; write: "setGoalState" }
-        Property { name: "jump"; type: "bool"; read: "jump"; write: "setJump" }
+        Property {
+            name: "goalState"
+            type: "QString"
+            read: "goalState"
+            write: "setGoalState"
+            notify: "goalStateChanged"
+            index: 0
+        }
+        Property {
+            name: "jump"
+            type: "bool"
+            read: "jump"
+            write: "setJump"
+            notify: "jumpChanged"
+            index: 1
+        }
         Signal {
             name: "goalStateChanged"
             Parameter { name: "arg"; type: "QString" }
@@ -415,7 +537,7 @@ Module {
         }
     }
     Component {
-        file: "private/qquickimageparticle_p.h"
+        file: "qquickimageparticle_p.h"
         name: "QQuickImageParticle"
         accessSemantics: "reference"
         prototype: "QQuickParticlePainter"
@@ -436,65 +558,158 @@ Module {
             name: "EntryEffect"
             values: ["None", "Fade", "Scale"]
         }
-        Property { name: "source"; type: "QUrl"; read: "image"; write: "setImage" }
-        Property { name: "sprites"; type: "QQuickSprite"; isList: true; isReadonly: true; read: "sprites" }
-        Property { name: "status"; type: "Status"; isReadonly: true; read: "status" }
-        Property { name: "colorTable"; type: "QUrl"; read: "colortable"; write: "setColortable" }
-        Property { name: "sizeTable"; type: "QUrl"; read: "sizetable"; write: "setSizetable" }
-        Property { name: "opacityTable"; type: "QUrl"; read: "opacitytable"; write: "setOpacitytable" }
-        Property { name: "color"; type: "QColor"; read: "color"; write: "setColor" }
+        Property {
+            name: "source"
+            type: "QUrl"
+            read: "image"
+            write: "setImage"
+            notify: "imageChanged"
+            index: 0
+        }
+        Property {
+            name: "sprites"
+            type: "QQuickSprite"
+            isList: true
+            read: "sprites"
+            index: 1
+            isReadonly: true
+        }
+        Property {
+            name: "status"
+            type: "Status"
+            read: "status"
+            notify: "statusChanged"
+            index: 2
+            isReadonly: true
+        }
+        Property {
+            name: "colorTable"
+            type: "QUrl"
+            read: "colortable"
+            write: "setColortable"
+            notify: "colortableChanged"
+            index: 3
+        }
+        Property {
+            name: "sizeTable"
+            type: "QUrl"
+            read: "sizetable"
+            write: "setSizetable"
+            notify: "sizetableChanged"
+            index: 4
+        }
+        Property {
+            name: "opacityTable"
+            type: "QUrl"
+            read: "opacitytable"
+            write: "setOpacitytable"
+            notify: "opacitytableChanged"
+            index: 5
+        }
+        Property {
+            name: "color"
+            type: "QColor"
+            read: "color"
+            write: "setColor"
+            notify: "colorChanged"
+            index: 6
+        }
         Property {
             name: "colorVariation"
             type: "double"
             read: "colorVariation"
             write: "setColorVariation"
+            notify: "colorVariationChanged"
+            index: 7
         }
-        Property { name: "redVariation"; type: "double"; read: "redVariation"; write: "setRedVariation" }
+        Property {
+            name: "redVariation"
+            type: "double"
+            read: "redVariation"
+            write: "setRedVariation"
+            notify: "redVariationChanged"
+            index: 8
+        }
         Property {
             name: "greenVariation"
             type: "double"
             read: "greenVariation"
             write: "setGreenVariation"
+            notify: "greenVariationChanged"
+            index: 9
         }
         Property {
             name: "blueVariation"
             type: "double"
             read: "blueVariation"
             write: "setBlueVariation"
+            notify: "blueVariationChanged"
+            index: 10
         }
-        Property { name: "alpha"; type: "double"; read: "alpha"; write: "setAlpha" }
+        Property {
+            name: "alpha"
+            type: "double"
+            read: "alpha"
+            write: "setAlpha"
+            notify: "alphaChanged"
+            index: 11
+        }
         Property {
             name: "alphaVariation"
             type: "double"
             read: "alphaVariation"
             write: "setAlphaVariation"
+            notify: "alphaVariationChanged"
+            index: 12
         }
-        Property { name: "rotation"; type: "double"; read: "rotation"; write: "setRotation" }
+        Property {
+            name: "rotation"
+            type: "double"
+            read: "rotation"
+            write: "setRotation"
+            notify: "rotationChanged"
+            index: 13
+        }
         Property {
             name: "rotationVariation"
             type: "double"
             read: "rotationVariation"
             write: "setRotationVariation"
+            notify: "rotationVariationChanged"
+            index: 14
         }
         Property {
             name: "rotationVelocity"
             type: "double"
             read: "rotationVelocity"
             write: "setRotationVelocity"
+            notify: "rotationVelocityChanged"
+            index: 15
         }
         Property {
             name: "rotationVelocityVariation"
             type: "double"
             read: "rotationVelocityVariation"
             write: "setRotationVelocityVariation"
+            notify: "rotationVelocityVariationChanged"
+            index: 16
         }
-        Property { name: "autoRotation"; type: "bool"; read: "autoRotation"; write: "setAutoRotation" }
+        Property {
+            name: "autoRotation"
+            type: "bool"
+            read: "autoRotation"
+            write: "setAutoRotation"
+            notify: "autoRotationChanged"
+            index: 17
+        }
         Property {
             name: "xVector"
             type: "QQuickDirection"
             isPointer: true
             read: "xVector"
             write: "setXVector"
+            notify: "xVectorChanged"
+            index: 18
         }
         Property {
             name: "yVector"
@@ -502,23 +717,31 @@ Module {
             isPointer: true
             read: "yVector"
             write: "setYVector"
+            notify: "yVectorChanged"
+            index: 19
         }
         Property {
             name: "spritesInterpolate"
             type: "bool"
             read: "spritesInterpolate"
             write: "setSpritesInterpolate"
+            notify: "spritesInterpolateChanged"
+            index: 20
         }
         Property {
             name: "entryEffect"
             type: "EntryEffect"
             read: "entryEffect"
             write: "setEntryEffect"
+            notify: "entryEffectChanged"
+            index: 21
         }
         Signal { name: "imageChanged" }
         Signal { name: "colortableChanged" }
         Signal { name: "sizetableChanged" }
         Signal { name: "opacitytableChanged" }
+        Signal { name: "colorChanged" }
+        Signal { name: "colorVariationChanged" }
         Signal {
             name: "alphaVariationChanged"
             Parameter { name: "arg"; type: "double" }
@@ -660,7 +883,7 @@ Module {
         }
     }
     Component {
-        file: "private/qquickitemparticle_p.h"
+        file: "qquickitemparticle_p.h"
         name: "QQuickItemParticle"
         accessSemantics: "reference"
         prototype: "QQuickParticlePainter"
@@ -674,14 +897,24 @@ Module {
         ]
         exportMetaObjectRevisions: [512, 513, 516, 519, 523, 1536]
         attachedType: "QQuickItemParticleAttached"
-        Property { name: "fade"; type: "bool"; read: "fade"; write: "setFade" }
+        Property {
+            name: "fade"
+            type: "bool"
+            read: "fade"
+            write: "setFade"
+            notify: "fadeChanged"
+            index: 0
+        }
         Property {
             name: "delegate"
             type: "QQmlComponent"
             isPointer: true
             read: "delegate"
             write: "setDelegate"
+            notify: "delegateChanged"
+            index: 1
         }
+        Signal { name: "fadeChanged" }
         Signal {
             name: "delegateChanged"
             Parameter { name: "arg"; type: "QQmlComponent"; isPointer: true }
@@ -717,22 +950,23 @@ Module {
         }
     }
     Component {
-        file: "private/qquickitemparticle_p.h"
+        file: "qquickitemparticle_p.h"
         name: "QQuickItemParticleAttached"
         accessSemantics: "reference"
         prototype: "QObject"
         Property {
             name: "particle"
             type: "QQuickItemParticle"
-            isReadonly: true
             isPointer: true
             read: "particle"
+            index: 0
+            isReadonly: true
         }
         Signal { name: "detached" }
         Signal { name: "attached" }
     }
     Component {
-        file: "private/qquicklineextruder_p.h"
+        file: "qquicklineextruder_p.h"
         name: "QQuickLineExtruder"
         accessSemantics: "reference"
         prototype: "QQuickParticleExtruder"
@@ -741,7 +975,14 @@ Module {
             "QtQuick.Particles/LineShape 6.0"
         ]
         exportMetaObjectRevisions: [512, 1536]
-        Property { name: "mirrored"; type: "bool"; read: "mirrored"; write: "setMirrored" }
+        Property {
+            name: "mirrored"
+            type: "bool"
+            read: "mirrored"
+            write: "setMirrored"
+            notify: "mirroredChanged"
+            index: 0
+        }
         Signal {
             name: "mirroredChanged"
             Parameter { name: "arg"; type: "bool" }
@@ -752,7 +993,7 @@ Module {
         }
     }
     Component {
-        file: "private/qquickmaskextruder_p.h"
+        file: "qquickmaskextruder_p.h"
         name: "QQuickMaskExtruder"
         accessSemantics: "reference"
         prototype: "QQuickParticleExtruder"
@@ -761,7 +1002,14 @@ Module {
             "QtQuick.Particles/MaskShape 6.0"
         ]
         exportMetaObjectRevisions: [512, 1536]
-        Property { name: "source"; type: "QUrl"; read: "source"; write: "setSource" }
+        Property {
+            name: "source"
+            type: "QUrl"
+            read: "source"
+            write: "setSource"
+            notify: "sourceChanged"
+            index: 0
+        }
         Signal {
             name: "sourceChanged"
             Parameter { name: "arg"; type: "QUrl" }
@@ -774,10 +1022,11 @@ Module {
         Method { name: "finishMaskLoading" }
     }
     Component {
-        file: "private/qquickparticleaffector_p.h"
+        file: "qquickparticleaffector_p.h"
         name: "QQuickParticleAffector"
         accessSemantics: "reference"
         defaultProperty: "data"
+        parentProperty: "parent"
         prototype: "QQuickItem"
         exports: [
             "QtQuick.Particles/ParticleAffector 2.0",
@@ -795,22 +1044,49 @@ Module {
             isPointer: true
             read: "system"
             write: "setSystem"
+            notify: "systemChanged"
+            index: 0
         }
-        Property { name: "groups"; type: "QStringList"; read: "groups"; write: "setGroups" }
+        Property {
+            name: "groups"
+            type: "QStringList"
+            read: "groups"
+            write: "setGroups"
+            notify: "groupsChanged"
+            index: 1
+        }
         Property {
             name: "whenCollidingWith"
             type: "QStringList"
             read: "whenCollidingWith"
             write: "setWhenCollidingWith"
+            notify: "whenCollidingWithChanged"
+            index: 2
         }
-        Property { name: "enabled"; type: "bool"; read: "enabled"; write: "setEnabled" }
-        Property { name: "once"; type: "bool"; read: "onceOff"; write: "setOnceOff" }
+        Property {
+            name: "enabled"
+            type: "bool"
+            read: "enabled"
+            write: "setEnabled"
+            notify: "enabledChanged"
+            index: 3
+        }
+        Property {
+            name: "once"
+            type: "bool"
+            read: "onceOff"
+            write: "setOnceOff"
+            notify: "onceChanged"
+            index: 4
+        }
         Property {
             name: "shape"
             type: "QQuickParticleExtruder"
             isPointer: true
             read: "shape"
             write: "setShape"
+            notify: "shapeChanged"
+            index: 5
         }
         Signal {
             name: "systemChanged"
@@ -868,10 +1144,11 @@ Module {
         Method { name: "updateOffsets" }
     }
     Component {
-        file: "private/qquickparticleemitter_p.h"
+        file: "qquickparticleemitter_p.h"
         name: "QQuickParticleEmitter"
         accessSemantics: "reference"
         defaultProperty: "data"
+        parentProperty: "parent"
         prototype: "QQuickItem"
         exports: [
             "QtQuick.Particles/Emitter 2.0",
@@ -892,43 +1169,97 @@ Module {
             isPointer: true
             read: "system"
             write: "setSystem"
+            notify: "systemChanged"
+            index: 0
         }
-        Property { name: "group"; type: "QString"; read: "group"; write: "setGroup" }
+        Property {
+            name: "group"
+            type: "QString"
+            read: "group"
+            write: "setGroup"
+            notify: "groupChanged"
+            index: 1
+        }
         Property {
             name: "shape"
             type: "QQuickParticleExtruder"
             isPointer: true
             read: "extruder"
             write: "setExtruder"
+            notify: "extruderChanged"
+            index: 2
         }
-        Property { name: "enabled"; type: "bool"; read: "enabled"; write: "setEnabled" }
-        Property { name: "startTime"; type: "int"; read: "startTime"; write: "setStartTime" }
+        Property {
+            name: "enabled"
+            type: "bool"
+            read: "enabled"
+            write: "setEnabled"
+            notify: "enabledChanged"
+            index: 3
+        }
+        Property {
+            name: "startTime"
+            type: "int"
+            read: "startTime"
+            write: "setStartTime"
+            notify: "startTimeChanged"
+            index: 4
+        }
         Property {
             name: "emitRate"
             type: "double"
             read: "particlesPerSecond"
             write: "setParticlesPerSecond"
+            notify: "particlesPerSecondChanged"
+            index: 5
         }
-        Property { name: "lifeSpan"; type: "int"; read: "particleDuration"; write: "setParticleDuration" }
+        Property {
+            name: "lifeSpan"
+            type: "int"
+            read: "particleDuration"
+            write: "setParticleDuration"
+            notify: "particleDurationChanged"
+            index: 6
+        }
         Property {
             name: "lifeSpanVariation"
             type: "int"
             read: "particleDurationVariation"
             write: "setParticleDurationVariation"
+            notify: "particleDurationVariationChanged"
+            index: 7
         }
         Property {
             name: "maximumEmitted"
             type: "int"
             read: "maxParticleCount"
             write: "setMaxParticleCount"
+            notify: "maximumEmittedChanged"
+            index: 8
         }
-        Property { name: "size"; type: "double"; read: "particleSize"; write: "setParticleSize" }
-        Property { name: "endSize"; type: "double"; read: "particleEndSize"; write: "setParticleEndSize" }
+        Property {
+            name: "size"
+            type: "double"
+            read: "particleSize"
+            write: "setParticleSize"
+            notify: "particleSizeChanged"
+            index: 9
+        }
+        Property {
+            name: "endSize"
+            type: "double"
+            read: "particleEndSize"
+            write: "setParticleEndSize"
+            notify: "particleEndSizeChanged"
+            index: 10
+        }
         Property {
             name: "sizeVariation"
             type: "double"
             read: "particleSizeVariation"
             write: "setParticleSizeVariation"
+            notify: "particleSizeVariationChanged"
+            index: 11
         }
         Property {
             name: "velocity"
@@ -936,6 +1267,8 @@ Module {
             isPointer: true
             read: "velocity"
             write: "setVelocity"
+            notify: "velocityChanged"
+            index: 12
         }
         Property {
             name: "acceleration"
@@ -943,12 +1276,16 @@ Module {
             isPointer: true
             read: "acceleration"
             write: "setAcceleration"
+            notify: "accelerationChanged"
+            index: 13
         }
         Property {
             name: "velocityFromMovement"
             type: "double"
             read: "velocityFromMovement"
             write: "setVelocityFromMovement"
+            notify: "velocityFromMovementChanged"
+            index: 14
         }
         Signal {
             name: "emitParticles"
@@ -1007,6 +1344,7 @@ Module {
             Parameter { name: "arg"; type: "int" }
         }
         Signal { name: "particleCountChanged" }
+        Signal { name: "velocityFromMovementChanged" }
         Signal {
             name: "startTimeChanged"
             Parameter { name: "arg"; type: "int" }
@@ -1084,7 +1422,7 @@ Module {
         Method { name: "reset" }
     }
     Component {
-        file: "private/qquickparticleextruder_p.h"
+        file: "qquickparticleextruder_p.h"
         name: "QQuickParticleExtruder"
         accessSemantics: "reference"
         prototype: "QObject"
@@ -1096,7 +1434,7 @@ Module {
         exportMetaObjectRevisions: [512, 1536]
     }
     Component {
-        file: "private/qquickparticlegroup_p.h"
+        file: "qquickparticlegroup_p.h"
         name: "QQuickParticleGroup"
         accessSemantics: "reference"
         defaultProperty: "particleChildren"
@@ -1113,13 +1451,16 @@ Module {
             isPointer: true
             read: "system"
             write: "setSystem"
+            notify: "systemChanged"
+            index: 0
         }
         Property {
             name: "particleChildren"
             type: "QObject"
             isList: true
-            isReadonly: true
             read: "particleChildren"
+            index: 1
+            isReadonly: true
         }
         Signal {
             name: "systemChanged"
@@ -1135,10 +1476,11 @@ Module {
         }
     }
     Component {
-        file: "private/qquickparticlepainter_p.h"
+        file: "qquickparticlepainter_p.h"
         name: "QQuickParticlePainter"
         accessSemantics: "reference"
         defaultProperty: "data"
+        parentProperty: "parent"
         prototype: "QQuickItem"
         exports: [
             "QtQuick.Particles/ParticlePainter 2.0",
@@ -1156,8 +1498,17 @@ Module {
             isPointer: true
             read: "system"
             write: "setSystem"
+            notify: "systemChanged"
+            index: 0
         }
-        Property { name: "groups"; type: "QStringList"; read: "groups"; write: "setGroups" }
+        Property {
+            name: "groups"
+            type: "QStringList"
+            read: "groups"
+            write: "setGroups"
+            notify: "groupsChanged"
+            index: 1
+        }
         Signal { name: "countChanged" }
         Signal {
             name: "systemChanged"
@@ -1183,10 +1534,11 @@ Module {
         Method { name: "sceneGraphInvalidated" }
     }
     Component {
-        file: "private/qquickparticlesystem_p.h"
+        file: "qquickparticlesystem_p.h"
         name: "QQuickParticleSystem"
         accessSemantics: "reference"
         defaultProperty: "data"
+        parentProperty: "parent"
         prototype: "QQuickItem"
         exports: [
             "QtQuick.Particles/ParticleSystem 2.0",
@@ -1197,9 +1549,30 @@ Module {
             "QtQuick.Particles/ParticleSystem 6.0"
         ]
         exportMetaObjectRevisions: [512, 513, 516, 519, 523, 1536]
-        Property { name: "running"; type: "bool"; read: "isRunning"; write: "setRunning" }
-        Property { name: "paused"; type: "bool"; read: "isPaused"; write: "setPaused" }
-        Property { name: "empty"; type: "bool"; isReadonly: true; read: "isEmpty" }
+        Property {
+            name: "running"
+            type: "bool"
+            read: "isRunning"
+            write: "setRunning"
+            notify: "runningChanged"
+            index: 0
+        }
+        Property {
+            name: "paused"
+            type: "bool"
+            read: "isPaused"
+            write: "setPaused"
+            notify: "pausedChanged"
+            index: 1
+        }
+        Property {
+            name: "empty"
+            type: "bool"
+            read: "isEmpty"
+            notify: "emptyChanged"
+            index: 2
+            isReadonly: true
+        }
         Signal { name: "systemInitialized" }
         Signal {
             name: "runningChanged"
@@ -1240,7 +1613,7 @@ Module {
         }
     }
     Component {
-        file: "private/qquickpointdirection_p.h"
+        file: "qquickpointdirection_p.h"
         name: "QQuickPointDirection"
         accessSemantics: "reference"
         prototype: "QQuickDirection"
@@ -1249,10 +1622,24 @@ Module {
             "QtQuick.Particles/PointDirection 6.0"
         ]
         exportMetaObjectRevisions: [512, 1536]
-        Property { name: "x"; type: "double"; read: "x"; write: "setX" }
-        Property { name: "y"; type: "double"; read: "y"; write: "setY" }
-        Property { name: "xVariation"; type: "double"; read: "xVariation"; write: "setXVariation" }
-        Property { name: "yVariation"; type: "double"; read: "yVariation"; write: "setYVariation" }
+        Property { name: "x"; type: "double"; read: "x"; write: "setX"; notify: "xChanged"; index: 0 }
+        Property { name: "y"; type: "double"; read: "y"; write: "setY"; notify: "yChanged"; index: 1 }
+        Property {
+            name: "xVariation"
+            type: "double"
+            read: "xVariation"
+            write: "setXVariation"
+            notify: "xVariationChanged"
+            index: 2
+        }
+        Property {
+            name: "yVariation"
+            type: "double"
+            read: "yVariation"
+            write: "setYVariation"
+            notify: "yVariationChanged"
+            index: 3
+        }
         Signal {
             name: "xChanged"
             Parameter { name: "arg"; type: "double" }
@@ -1287,7 +1674,7 @@ Module {
         }
     }
     Component {
-        file: "private/qquickrectangleextruder_p.h"
+        file: "qquickrectangleextruder_p.h"
         name: "QQuickRectangleExtruder"
         accessSemantics: "reference"
         prototype: "QQuickParticleExtruder"
@@ -1296,7 +1683,14 @@ Module {
             "QtQuick.Particles/RectangleShape 6.0"
         ]
         exportMetaObjectRevisions: [512, 1536]
-        Property { name: "fill"; type: "bool"; read: "fill"; write: "setFill" }
+        Property {
+            name: "fill"
+            type: "bool"
+            read: "fill"
+            write: "setFill"
+            notify: "fillChanged"
+            index: 0
+        }
         Signal {
             name: "fillChanged"
             Parameter { name: "arg"; type: "bool" }
@@ -1307,7 +1701,7 @@ Module {
         }
     }
     Component {
-        file: "private/qquickspritegoal_p.h"
+        file: "qquickspritegoal_p.h"
         name: "QQuickSpriteGoalAffector"
         accessSemantics: "reference"
         prototype: "QQuickParticleAffector"
@@ -1320,9 +1714,30 @@ Module {
             "QtQuick.Particles/SpriteGoal 6.0"
         ]
         exportMetaObjectRevisions: [512, 513, 516, 519, 523, 1536]
-        Property { name: "goalState"; type: "QString"; read: "goalState"; write: "setGoalState" }
-        Property { name: "jump"; type: "bool"; read: "jump"; write: "setJump" }
-        Property { name: "systemStates"; type: "bool"; read: "systemStates"; write: "setSystemStates" }
+        Property {
+            name: "goalState"
+            type: "QString"
+            read: "goalState"
+            write: "setGoalState"
+            notify: "goalStateChanged"
+            index: 0
+        }
+        Property {
+            name: "jump"
+            type: "bool"
+            read: "jump"
+            write: "setJump"
+            notify: "jumpChanged"
+            index: 1
+        }
+        Property {
+            name: "systemStates"
+            type: "bool"
+            read: "systemStates"
+            write: "setSystemStates"
+            notify: "systemStatesChanged"
+            index: 2
+        }
         Signal {
             name: "goalStateChanged"
             Parameter { name: "arg"; type: "QString" }
@@ -1353,16 +1768,46 @@ Module {
         name: "QQuickStochasticState"
         accessSemantics: "reference"
         prototype: "QObject"
-        Property { name: "duration"; type: "int"; read: "duration"; write: "setDuration" }
+        Property {
+            name: "duration"
+            type: "int"
+            read: "duration"
+            write: "setDuration"
+            notify: "durationChanged"
+            index: 0
+        }
         Property {
             name: "durationVariation"
             type: "int"
             read: "durationVariation"
             write: "setDurationVariation"
+            notify: "durationVariationChanged"
+            index: 1
         }
-        Property { name: "randomStart"; type: "bool"; read: "randomStart"; write: "setRandomStart" }
-        Property { name: "to"; type: "QVariantMap"; read: "to"; write: "setTo" }
-        Property { name: "name"; type: "QString"; read: "name"; write: "setName" }
+        Property {
+            name: "randomStart"
+            type: "bool"
+            read: "randomStart"
+            write: "setRandomStart"
+            notify: "randomStartChanged"
+            index: 2
+        }
+        Property {
+            name: "to"
+            type: "QVariantMap"
+            read: "to"
+            write: "setTo"
+            notify: "toChanged"
+            index: 3
+        }
+        Property {
+            name: "name"
+            type: "QString"
+            read: "name"
+            write: "setName"
+            notify: "nameChanged"
+            index: 4
+        }
         Signal {
             name: "durationChanged"
             Parameter { name: "arg"; type: "int" }
@@ -1406,7 +1851,7 @@ Module {
         }
     }
     Component {
-        file: "private/qquicktargetdirection_p.h"
+        file: "qquicktargetdirection_p.h"
         name: "QQuickTargetDirection"
         accessSemantics: "reference"
         prototype: "QQuickDirection"
@@ -1415,33 +1860,62 @@ Module {
             "QtQuick.Particles/TargetDirection 6.0"
         ]
         exportMetaObjectRevisions: [512, 1536]
-        Property { name: "targetX"; type: "double"; read: "targetX"; write: "setTargetX" }
-        Property { name: "targetY"; type: "double"; read: "targetY"; write: "setTargetY" }
+        Property {
+            name: "targetX"
+            type: "double"
+            read: "targetX"
+            write: "setTargetX"
+            notify: "targetXChanged"
+            index: 0
+        }
+        Property {
+            name: "targetY"
+            type: "double"
+            read: "targetY"
+            write: "setTargetY"
+            notify: "targetYChanged"
+            index: 1
+        }
         Property {
             name: "targetItem"
             type: "QQuickItem"
             isPointer: true
             read: "targetItem"
             write: "setTargetItem"
+            notify: "targetItemChanged"
+            index: 2
         }
         Property {
             name: "targetVariation"
             type: "double"
             read: "targetVariation"
             write: "setTargetVariation"
+            notify: "targetVariationChanged"
+            index: 3
         }
         Property {
             name: "proportionalMagnitude"
             type: "bool"
             read: "proportionalMagnitude"
             write: "setProportionalMagnitude"
+            notify: "proprotionalMagnitudeChanged"
+            index: 4
         }
-        Property { name: "magnitude"; type: "double"; read: "magnitude"; write: "setMagnitude" }
+        Property {
+            name: "magnitude"
+            type: "double"
+            read: "magnitude"
+            write: "setMagnitude"
+            notify: "magnitudeChanged"
+            index: 5
+        }
         Property {
             name: "magnitudeVariation"
             type: "double"
             read: "magnitudeVariation"
             write: "setMagnitudeVariation"
+            notify: "magnitudeVariationChanged"
+            index: 6
         }
         Signal {
             name: "targetXChanged"
@@ -1501,7 +1975,7 @@ Module {
         }
     }
     Component {
-        file: "private/qquicktrailemitter_p.h"
+        file: "qquicktrailemitter_p.h"
         name: "QQuickTrailEmitter"
         accessSemantics: "reference"
         prototype: "QQuickParticleEmitter"
@@ -1518,12 +1992,21 @@ Module {
             name: "EmitSize"
             values: ["ParticleSize"]
         }
-        Property { name: "follow"; type: "QString"; read: "follow"; write: "setFollow" }
+        Property {
+            name: "follow"
+            type: "QString"
+            read: "follow"
+            write: "setFollow"
+            notify: "followChanged"
+            index: 0
+        }
         Property {
             name: "emitRatePerParticle"
             type: "int"
             read: "particlesPerParticlePerSecond"
             write: "setParticlesPerParticlePerSecond"
+            notify: "particlesPerParticlePerSecondChanged"
+            index: 1
         }
         Property {
             name: "emitShape"
@@ -1531,18 +2014,24 @@ Module {
             isPointer: true
             read: "emissonShape"
             write: "setEmissionShape"
+            notify: "emissionShapeChanged"
+            index: 2
         }
         Property {
             name: "emitHeight"
             type: "double"
             read: "emitterYVariation"
             write: "setEmitterYVariation"
+            notify: "emitterYVariationChanged"
+            index: 3
         }
         Property {
             name: "emitWidth"
             type: "double"
             read: "emitterXVariation"
             write: "setEmitterXVariation"
+            notify: "emitterXVariationChanged"
+            index: 4
         }
         Signal {
             name: "emitFollowParticles"
@@ -1592,7 +2081,7 @@ Module {
         Method { name: "recalcParticlesPerSecond" }
     }
     Component {
-        file: "private/qquickturbulence_p.h"
+        file: "qquickturbulence_p.h"
         name: "QQuickTurbulenceAffector"
         accessSemantics: "reference"
         prototype: "QQuickParticleAffector"
@@ -1605,8 +2094,22 @@ Module {
             "QtQuick.Particles/Turbulence 6.0"
         ]
         exportMetaObjectRevisions: [512, 513, 516, 519, 523, 1536]
-        Property { name: "strength"; type: "double"; read: "strength"; write: "setStrength" }
-        Property { name: "noiseSource"; type: "QUrl"; read: "noiseSource"; write: "setNoiseSource" }
+        Property {
+            name: "strength"
+            type: "double"
+            read: "strength"
+            write: "setStrength"
+            notify: "strengthChanged"
+            index: 0
+        }
+        Property {
+            name: "noiseSource"
+            type: "QUrl"
+            read: "noiseSource"
+            write: "setNoiseSource"
+            notify: "noiseSourceChanged"
+            index: 1
+        }
         Signal {
             name: "strengthChanged"
             Parameter { name: "arg"; type: "double" }
@@ -1625,7 +2128,7 @@ Module {
         }
     }
     Component {
-        file: "private/qquickwander_p.h"
+        file: "qquickwander_p.h"
         name: "QQuickWanderAffector"
         accessSemantics: "reference"
         prototype: "QQuickParticleAffector"
@@ -1642,14 +2145,37 @@ Module {
             name: "AffectableParameters"
             values: ["Position", "Velocity", "Acceleration"]
         }
-        Property { name: "pace"; type: "double"; read: "pace"; write: "setPace" }
-        Property { name: "xVariance"; type: "double"; read: "xVariance"; write: "setXVariance" }
-        Property { name: "yVariance"; type: "double"; read: "yVariance"; write: "setYVariance" }
+        Property {
+            name: "pace"
+            type: "double"
+            read: "pace"
+            write: "setPace"
+            notify: "paceChanged"
+            index: 0
+        }
+        Property {
+            name: "xVariance"
+            type: "double"
+            read: "xVariance"
+            write: "setXVariance"
+            notify: "xVarianceChanged"
+            index: 1
+        }
+        Property {
+            name: "yVariance"
+            type: "double"
+            read: "yVariance"
+            write: "setYVariance"
+            notify: "yVarianceChanged"
+            index: 2
+        }
         Property {
             name: "affectedParameter"
             type: "AffectableParameters"
             read: "affectedParameter"
             write: "setAffectedParameter"
+            notify: "affectedParameterChanged"
+            index: 3
         }
         Signal {
             name: "xVarianceChanged"

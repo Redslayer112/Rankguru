@@ -34,6 +34,9 @@ public:
 %If (PyQt_OpenGL)
     static QQuickRenderTarget fromOpenGLTexture(uint textureId, const QSize &pixelSize, int sampleCount = 1);
 %End
+%If (Qt_6_2_0 -)
+    static QQuickRenderTarget fromOpenGLRenderBuffer(uint renderbufferId, const QSize &pixelSize, int sampleCount = 1);
+%End
 };
 
 bool operator==(const QQuickRenderTarget &lhs, const QQuickRenderTarget &rhs);

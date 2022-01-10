@@ -24,7 +24,24 @@ Module {
         isCreatable: false
         exportMetaObjectRevisions: [515, 1536]
         attachedType: "QQuickImagineStyle"
-        Property { name: "path"; type: "QString"; read: "path"; write: "setPath" }
-        Property { name: "url"; type: "QUrl"; isReadonly: true; read: "url" }
+        Property {
+            name: "path"
+            type: "QString"
+            read: "path"
+            write: "setPath"
+            notify: "pathChanged"
+            index: 0
+            isFinal: true
+        }
+        Property {
+            name: "url"
+            type: "QUrl"
+            read: "url"
+            notify: "pathChanged"
+            index: 1
+            isReadonly: true
+            isFinal: true
+        }
+        Signal { name: "pathChanged" }
     }
 }

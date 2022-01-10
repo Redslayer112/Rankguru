@@ -127,4 +127,10 @@ public:
     void setStackSize(uint stackSize);
     uint stackSize() const;
     bool contains(const QThread *thread) const;
+%If (Qt_6_2_0 -)
+    void setThreadPriority(QThread::Priority priority);
+%End
+%If (Qt_6_2_0 -)
+    QThread::Priority threadPriority() const;
+%End
 };

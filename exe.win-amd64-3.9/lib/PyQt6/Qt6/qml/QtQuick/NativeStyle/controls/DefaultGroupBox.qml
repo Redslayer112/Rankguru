@@ -50,8 +50,6 @@ T.GroupBox {
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
                              contentHeight + topPadding + bottomPadding)
 
-    font.pixelSize: __nativeBackground ? background.styleFont(control).pixelSize : undefined
-
     label: Rectangle {
         color: control.palette.window
         property point labelPos : control.__nativeBackground
@@ -77,14 +75,11 @@ T.GroupBox {
     topPadding: __nativeBackground ? background.contentPadding.top : 0
     bottomPadding: __nativeBackground ? background.contentPadding.bottom : 0
 
+    leftInset: __nativeBackground ? background.groupBoxPadding.left : 0
+    topInset: __nativeBackground ? background.groupBoxPadding.top : 0
+
     background: NativeStyle.GroupBox {
         control: control
-
-        x: groupBoxPadding.left
-        y: groupBoxPadding.top
-        width: contentItem.width + control.leftPadding + control.rightPadding - groupBoxPadding.left - groupBoxPadding.right
-        height: contentItem.height + control.topPadding + control.bottomPadding - groupBoxPadding.top - groupBoxPadding.bottom
-
         contentWidth: contentItem.implicitWidth
         contentHeight: contentItem.implicitHeight
     }

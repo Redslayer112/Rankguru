@@ -51,6 +51,9 @@ public:
         Velocity,
         NormalizedPosition,
         MouseEmulation,
+%If (Qt_6_2_0 -)
+        PixelScroll,
+%End
         Scroll,
         Hover,
         Rotation,

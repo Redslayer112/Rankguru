@@ -77,4 +77,7 @@ public:
     QSql::NumericalPrecisionPolicy numericalPrecisionPolicy() const;
     void finish();
     bool nextResult();
+%If (Qt_6_2_0 -)
+    void swap(QSqlQuery &other /Constrained/);
+%End
 };

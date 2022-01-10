@@ -93,6 +93,9 @@ public:
     bool isShortcut() const;
     bool isJunction() const;
     void stat();
+%If (Qt_6_2_0 -)
+    QString junctionTarget() const;
+%End
 };
 
 typedef QList<QFileInfo> QFileInfoList;

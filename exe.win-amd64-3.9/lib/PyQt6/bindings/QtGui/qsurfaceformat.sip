@@ -33,6 +33,9 @@ public:
         DebugContext,
         DeprecatedFunctions,
         ResetNotification,
+%If (Qt_6_2_0 -)
+        ProtectedContent,
+%End
     };
 
     typedef QFlags<QSurfaceFormat::FormatOption> FormatOptions;

@@ -19,6 +19,9 @@
 // WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 
 
+%If (!PyQt_OpenGL_ES2)
+
+
 %MappedType QList<GLuint64>
         /TypeHintIn="Iterable[int]", TypeHintOut="List[int]",
         TypeHintValue="[]"/
@@ -121,3 +124,6 @@
     return sipGetState(sipTransferObj);
 %End
 };
+
+
+%End

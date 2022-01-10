@@ -408,3 +408,96 @@ template<_TYPE_>
     return sipGetState(sipTransferObj);
 %End
 };
+
+
+%If (Qt_6_2_0 -)
+
+%MappedType std::pair<qreal, qreal> /TypeHint="Tuple[float, float]"/
+{
+%TypeHeaderCode
+#include <utility>
+%End
+
+%ConvertFromTypeCode
+    return Py_BuildValue("(ff)", sipCpp->first, sipCpp->second);
+%End
+
+%ConvertToTypeCode
+    if (!sipIsErr)
+        return (PySequence_Check(sipPy) && !PyUnicode_Check(sipPy));
+
+    Py_ssize_t len = PySequence_Size(sipPy);
+
+    if (len != 2)
+    {
+        // A negative length should only be an internal error so let the
+        // original exception stand.
+        if (len >= 0)
+            PyErr_Format(PyExc_TypeError,
+                    "sequence has %zd elements but 2 elements are expected",
+                    len);
+
+        *sipIsErr = 1;
+
+        return 0;
+    }
+
+    PyObject *firstobj = PySequence_GetItem(sipPy, 0);
+
+    if (!firstobj)
+    {
+        *sipIsErr = 1;
+
+        return 0;
+    }
+
+    PyErr_Clear();
+    double first = PyFloat_AsDouble(firstobj);
+
+    if (PyErr_Occurred())
+    {
+        PyErr_Format(PyExc_TypeError,
+                "the first element has type '%s' but 'float' is expected",
+                sipPyTypeName(Py_TYPE(firstobj)));
+
+        *sipIsErr = 1;
+
+        return 0;
+    }
+
+    PyObject *secondobj = PySequence_GetItem(sipPy, 1);
+
+    if (!secondobj)
+    {
+        Py_DECREF(firstobj);
+        *sipIsErr = 1;
+
+        return 0;
+    }
+
+    PyErr_Clear();
+    double second = PyFloat_AsDouble(secondobj);
+
+    if (PyErr_Occurred())
+    {
+        PyErr_Format(PyExc_TypeError,
+                "the second element has type '%s' but 'float' is expected",
+                sipPyTypeName(Py_TYPE(secondobj)));
+
+        Py_DECREF(secondobj);
+        Py_DECREF(firstobj);
+        *sipIsErr = 1;
+
+        return 0;
+    }
+
+    *sipCppPtr = new std::pair<qreal, qreal>(first, second);;
+
+    Py_DECREF(secondobj);
+    Py_DECREF(firstobj);
+ 
+    return sipGetState(sipTransferObj);
+%End
+};
+
+%End

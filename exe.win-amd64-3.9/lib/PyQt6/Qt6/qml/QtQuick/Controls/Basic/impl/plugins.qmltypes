@@ -11,6 +11,7 @@ Module {
         name: "QQuickBasicBusyIndicator"
         accessSemantics: "reference"
         defaultProperty: "data"
+        parentProperty: "parent"
         prototype: "QQuickItem"
         exports: [
             "QtQuick.Controls.Basic.impl/BusyIndicatorImpl 2.0",
@@ -21,9 +22,9 @@ Module {
             "QtQuick.Controls.Basic.impl/BusyIndicatorImpl 6.0"
         ]
         exportMetaObjectRevisions: [512, 513, 516, 519, 523, 1536]
-        Property { name: "pen"; type: "QColor"; read: "pen"; write: "setPen" }
-        Property { name: "fill"; type: "QColor"; read: "fill"; write: "setFill" }
-        Property { name: "running"; type: "bool"; read: "isRunning"; write: "setRunning" }
+        Property { name: "pen"; type: "QColor"; read: "pen"; write: "setPen"; index: 0; isFinal: true }
+        Property { name: "fill"; type: "QColor"; read: "fill"; write: "setFill"; index: 1; isFinal: true }
+        Property { name: "running"; type: "bool"; read: "isRunning"; write: "setRunning"; index: 2 }
     }
     Component {
         file: "qquickbasicdial_p.h"
@@ -39,14 +40,22 @@ Module {
             "QtQuick.Controls.Basic.impl/DialImpl 6.0"
         ]
         exportMetaObjectRevisions: [512, 513, 516, 519, 523, 1536]
-        Property { name: "progress"; type: "double"; read: "progress"; write: "setProgress" }
-        Property { name: "color"; type: "QColor"; read: "color"; write: "setColor" }
+        Property {
+            name: "progress"
+            type: "double"
+            read: "progress"
+            write: "setProgress"
+            index: 0
+            isFinal: true
+        }
+        Property { name: "color"; type: "QColor"; read: "color"; write: "setColor"; index: 1; isFinal: true }
     }
     Component {
         file: "qquickbasicprogressbar_p.h"
         name: "QQuickBasicProgressBar"
         accessSemantics: "reference"
         defaultProperty: "data"
+        parentProperty: "parent"
         prototype: "QQuickItem"
         exports: [
             "QtQuick.Controls.Basic.impl/ProgressBarImpl 2.0",
@@ -62,8 +71,17 @@ Module {
             type: "bool"
             read: "isIndeterminate"
             write: "setIndeterminate"
+            index: 0
+            isFinal: true
         }
-        Property { name: "progress"; type: "double"; read: "progress"; write: "setProgress" }
-        Property { name: "color"; type: "QColor"; read: "color"; write: "setColor" }
+        Property {
+            name: "progress"
+            type: "double"
+            read: "progress"
+            write: "setProgress"
+            index: 1
+            isFinal: true
+        }
+        Property { name: "color"; type: "QColor"; read: "color"; write: "setColor"; index: 2; isFinal: true }
     }
 }
